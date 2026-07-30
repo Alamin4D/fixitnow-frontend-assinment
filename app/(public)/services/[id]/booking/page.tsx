@@ -7,6 +7,7 @@ type Props = {
   }>;
 };
 
+
 const BookingPage = async ({ params }: Props) => {
   const { id } = await params;
 
