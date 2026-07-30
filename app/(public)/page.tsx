@@ -1,11 +1,13 @@
-import { Button } from "@/components/ui/button";
-
+import Hero from "@/components/home/Hero";
+import FeaturedServices from "@/components/home/FeaturedServices";
+import TopTechnicians from "@/components/home/TopTechnicians";
 
 export default function HomePage() {
   return (
-    <div>
-      <h1>Hello Fixit</h1>
-      <Button>Clicked Me</Button>
-    </div>
+    <main>
+      <Hero />
+      <FeaturedServices />
+      <TopTechnicians />
+    </main>
   );
 }
