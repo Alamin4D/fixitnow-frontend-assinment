@@ -50,7 +50,17 @@ export default async function Navbar() {
             {user ? (
               <>
                 <Button asChild>
-                  <Link href="/dashboard">Dashboard</Link>
+                  <Link
+                    href={
+                      user?.role === "TECHNICIAN"
+                        ? "/technician-dashboard"
+                        : user?.role === "ADMIN"
+                          ? "/admin-dashboard"
+                          : "/customer-dashboard"
+                    }
+                  >
+                    Dashboard
+                  </Link>
                 </Button>
 
                 <form action={logoutAction}>

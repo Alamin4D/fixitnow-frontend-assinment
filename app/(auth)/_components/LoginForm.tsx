@@ -29,7 +29,22 @@ export default function LoginForm() {
         if (state.success) {
             toast.success(state.message);
 
-            router.push("/dashboard");
+            switch (state.role) {
+                case "ADMIN":
+                    router.push("/admin-dashboard");
+                    break;
+
+                case "TECHNICIAN":
+                    router.push("/technician-dashboard");
+                    break;
+
+                case "CUSTOMER":
+                    router.push("/customer-dashboard");
+                    break;
+
+                default:
+                    router.push("/");
+            }
         } else {
             toast.error(state.message);
         }

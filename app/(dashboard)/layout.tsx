@@ -1,15 +1,28 @@
-import React from 'react'
+import { cookies } from "next/headers";
+import DashboardShell from "@/components/dashboard/dashboard-shell";
 
-const DashboardLayout = ({
-    children,
+export default async function DashboardLayout({
+  children,
 }: {
-    children: React.ReactNode
-}) => {
-    return (
-        <div>
-            {children}
-        </div>
-    )
-}
+  children: React.ReactNode;
+}) {
+  const cookieStore = await cookies();
 
-export default DashboardLayout
+  const role = cookieStore.get("role")?.value as
+    | "CUSTOMER"
+    | "TECHNICIAN"
+    | "ADMIN";
+
+  const name = cookieStore.get("name")?.value ?? "";
+  const email = cookieStore.get("email")?.value ?? "";
+
+  return (
+    <DashboardShell
+      role={role}
+      name={name}
+      email={email}
+    >
+      {children}
+    </DashboardShell>
+  );
+}

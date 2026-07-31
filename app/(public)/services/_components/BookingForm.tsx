@@ -48,7 +48,7 @@ export default function BookingForm({ serviceId }: BookingFormProps) {
       if (res.success) {
         toast.success("Booking request submitted successfully!");
         reset();
-        router.push("/dashboard/customer/bookings");
+        router.push("/customer-dashboard/bookings");
         router.refresh();
       } else {
         toast.error(res.message || "Failed to create booking.");

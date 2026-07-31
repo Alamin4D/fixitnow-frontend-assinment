@@ -3,8 +3,8 @@ import { Outfit, Oxanium } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import Navbar from "@/components/shared/Navbar";
-import Footer from "@/components/shared/Footer";
+// import Navbar from "@/components/shared/Navbar";
+// import Footer from "@/components/shared/Footer";
 
 const oxaniumHeading = Oxanium({ subsets: ['latin'], variable: '--font-heading' });
 
@@ -27,9 +27,9 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <Toaster position="top-right" richColors />
-        <Navbar />
+        {/* <Navbar /> */}
         {children}
-        <Footer />
+        {/* <Footer /> */}
       </body>
     </html>
   );
