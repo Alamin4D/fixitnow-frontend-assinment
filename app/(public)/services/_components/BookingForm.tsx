@@ -42,6 +42,7 @@ export default function BookingForm({ serviceId }: BookingFormProps) {
         serviceId,
         ...values,
       };
+      
 
       const res = await createBooking(payload);
 
