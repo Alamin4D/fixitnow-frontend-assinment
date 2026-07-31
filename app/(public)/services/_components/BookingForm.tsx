@@ -17,6 +17,7 @@ type BookingFormProps = {
   serviceId: string;
 };
 
+
 export default function BookingForm({ serviceId }: BookingFormProps) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -42,7 +43,7 @@ export default function BookingForm({ serviceId }: BookingFormProps) {
         serviceId,
         ...values,
       };
-      
+
 
       const res = await createBooking(payload);
 
