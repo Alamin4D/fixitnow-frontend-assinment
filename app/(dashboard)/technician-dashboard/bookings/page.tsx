@@ -1,19 +1,12 @@
+export const dynamic = "force-dynamic";
 
 import { getTechnicianBookings } from "../_actions/get-technician-bookings";
 import TechnicianBookingsTable from "../_components/technician-bookings-table";
 
-
-
-const TechnicianBookingsPage = async () => {
+export default async function TechnicianBookingsPage() {
   const result = await getTechnicianBookings();
 
   return (
-    <div className="p-6">
-      <TechnicianBookingsTable
-        bookings={result.data || []}
-      />
-    </div>
+    <TechnicianBookingsTable bookings={result.data ?? []} />
   );
-};
-
-export default TechnicianBookingsPage;
+}
