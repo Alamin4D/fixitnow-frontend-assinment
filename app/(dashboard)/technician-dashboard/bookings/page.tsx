@@ -1,5 +1,6 @@
-import { getTechnicianBookings } from "../../customer-dashboard/_actions/get-technician-bookings";
-import TechnicianBookingsTable from "../../customer-dashboard/_components/technician-bookings-table";
+
+import { getTechnicianBookings } from "../_actions/get-technician-bookings";
+import TechnicianBookingsTable from "../_components/technician-bookings-table";
 
 
 

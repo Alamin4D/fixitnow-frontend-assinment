@@ -3,7 +3,6 @@
 import Link from "next/link";
 import {
     ChevronDown,
-    LogOut,
     Settings,
     User,
     LayoutDashboard,

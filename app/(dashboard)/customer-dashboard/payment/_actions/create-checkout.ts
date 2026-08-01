@@ -12,7 +12,7 @@ export const createCheckout = async (bookingId: string) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`, // যদি backend Bearer token ব্যবহার করে
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ bookingId }),
       cache: "no-store",

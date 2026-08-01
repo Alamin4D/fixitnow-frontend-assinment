@@ -5,7 +5,7 @@ import { CheckCircle, Loader2, XCircle } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
-import { updateBookingStatus } from "../_actions/update-booking-status";
+import { updateBookingStatus } from "../../customer-dashboard/_actions/update-booking-status";
 
 interface BookingActionButtonsProps {
   bookingId: string;
