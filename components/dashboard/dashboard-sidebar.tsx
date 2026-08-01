@@ -85,27 +85,27 @@ const technicianLinks = [
 const adminLinks = [
   {
     title: "Dashboard",
-    href: "/admin",
+    href: "/admin-dashboard",
     icon: LayoutDashboard,
   },
   {
     title: "Users",
-    href: "/admin/users",
+    href: "/admin-dashboard/users",
     icon: Users,
   },
   {
     title: "Technicians",
-    href: "/admin/technicians",
+    href: "/admin-dashboard/technicians",
     icon: Wrench,
   },
   {
     title: "Bookings",
-    href: "/admin/bookings",
+    href: "/admin-dashboard/bookings",
     icon: ClipboardList,
   },
   {
     title: "Profile",
-    href: "/admin/profile",
+    href: "/admin-dashboard/profile",
     icon: UserCircle,
   },
 ];
