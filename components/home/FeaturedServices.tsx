@@ -1,44 +1,43 @@
 import Link from "next/link";
-import { getServices } from "@/app/(public)/_actions/getServices";
-import ServiceCard from "./ServiceCard";
+
 import Container from "../shared/Container";
+import ServiceCard from "./ServiceCard";
+import { getServices } from "@/app/(public)/_actions/getServices";
 
 export default async function FeaturedServices() {
     const services = await getServices();
 
     return (
-        <Container>
-            <section className="py-20">
-                <div className="container mx-auto px-4">
-                    <div className="mb-10 flex items-center justify-between">
-                        <div>
-                            <h2 className="text-4xl font-bold">
-                                Featured Services
-                            </h2>
+        <section className="py-20">
+            <Container>
+                <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                        <h2 className="text-4xl font-bold">
+                            Featured Services
+                        </h2>
 
-                            <p className="mt-2 text-slate-600">
-                                Discover our most popular home services.
-                            </p>
-                        </div>
-
-                        <Link
-                            href="/services"
-                            className="font-semibold text-blue-600 hover:underline"
-                        >
-                            View All →
-                        </Link>
+                        <p className="mt-2 text-muted-foreground">
+                            Discover our most popular home services.
+                        </p>
                     </div>
 
-                    <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                        {services.slice(0, 8).map((service: any) => (
-                            <ServiceCard
-                                key={service.id}
-                                service={service}
-                            />
-                        ))}
-                    </div>
+                    <Link
+                        href="/services"
+                        className="font-semibold text-primary transition hover:underline"
+                    >
+                        View All →
+                    </Link>
                 </div>
-            </section>
-        </Container>
+
+                <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                    {services.slice(0, 6).map((service: any) => (
+                        <ServiceCard
+                            key={service.id}
+                            service={service}
+                        />
+                    ))}
+                </div>
+            </Container>
+        </section>
     );
 }
