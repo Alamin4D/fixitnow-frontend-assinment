@@ -1,8 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Briefcase, MapPin, Phone, Mail, Star } from "lucide-react";
+import { MapPin, Phone, Mail, Star } from "lucide-react";
 
 export default function TechnicianProfile({
   technician,

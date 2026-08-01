@@ -1,7 +1,6 @@
 "use client";
 
 import { useTransition } from "react";
-import { useRouter } from "next/navigation";
 
 import PaymentMethodCard from "./PaymentMethodCard";
 import { createCheckout } from "../_actions/create-checkout";
@@ -13,8 +12,6 @@ interface Props {
 
 const PaymentMethodSection = ({ bookingId }: Props) => {
     const [isPending, startTransition] = useTransition();
-
-    const router = useRouter();
 
     const handleCheckout = () => {
         startTransition(async () => {

@@ -14,6 +14,7 @@ import {
   Settings,
   Shield,
   LogOut,
+  ChartBarStacked,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -65,16 +66,16 @@ const technicianLinks = [
     href: "/technician-dashboard/bookings",
     icon: ClipboardList,
   },
-  {
-    title: "Services",
-    href: "/technician-dashboard/services",
-    icon: Wrench,
-  },
-  {
-    title: "Reviews",
-    href: "/technician-dashboard/reviews",
-    icon: Star,
-  },
+  // {
+  //   title: "Availability",
+  //   href: "/technician-dashboard/availability",
+  //   icon: Wrench,
+  // },
+  // {
+  //   title: "Reviews",
+  //   href: "/technician-dashboard/reviews",
+  //   icon: Star,
+  // },
   {
     title: "Profile",
     href: "/technician-dashboard/profile",
@@ -93,20 +94,20 @@ const adminLinks = [
     href: "/admin-dashboard/users",
     icon: Users,
   },
+  // {
+  //   title: "Technicians",
+  //   href: "/admin-dashboard/technicians",
+  //   icon: Wrench,
+  // },
+  // {
+  //   title: "Bookings",
+  //   href: "/admin-dashboard/bookings",
+  //   icon: ClipboardList,
+  // },
   {
-    title: "Technicians",
-    href: "/admin-dashboard/technicians",
-    icon: Wrench,
-  },
-  {
-    title: "Bookings",
-    href: "/admin-dashboard/bookings",
-    icon: ClipboardList,
-  },
-  {
-    title: "Profile",
-    href: "/admin-dashboard/profile",
-    icon: UserCircle,
+    title: "Categories",
+    href: "/admin-dashboard/categories",
+    icon: ChartBarStacked,
   },
 ];
 

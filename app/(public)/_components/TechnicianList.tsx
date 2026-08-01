@@ -1,4 +1,5 @@
-import TechnicianCard from "./TechnicianCard";
+import TechnicianCard from "@/components/home/TechnicianCard";
+
 
 
 export default function TechnicianList({

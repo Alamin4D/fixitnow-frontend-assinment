@@ -25,5 +25,18 @@ export async function createBooking(data: unknown) {
     }
   );
 
-  return await res.json();
+  const result = await res.json();
+
+  if (!res.ok) {
+    return {
+      success: false,
+      message: result.message || "Failed to create booking",
+    };
+  }
+
+  return {
+    success: true,
+    message: "Booking created successfully",
+    data: result.data || result,
+  };
 }

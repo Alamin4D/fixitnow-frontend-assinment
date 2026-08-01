@@ -4,12 +4,12 @@ import { cookies } from "next/headers";
 
 const BACKEND_API_URL = process.env.BACKEND_API_URL!;
 
-export const getTechnicianBookings = async () => {
+export const getTechnicianAvailability = async () => {
   const token = (await cookies()).get("accessToken")?.value;
 
   try {
     const res = await fetch(
-      `${BACKEND_API_URL}/api/bookings`,
+      `${BACKEND_API_URL}/api/availability`,
       {
         method: "GET",
         headers: {
@@ -24,7 +24,7 @@ export const getTechnicianBookings = async () => {
     if (!res.ok) {
       return {
         success: false,
-        message: data.message || "Failed to fetch bookings.",
+        message: data.message || "Failed to fetch availability.",
         data: [],
       };
     }
@@ -35,7 +35,7 @@ export const getTechnicianBookings = async () => {
       data: data.data,
     };
   } catch (error) {
-    console.error("Get Technician Bookings Error:", error);
+    console.error("Get Technician Availability Error:", error);
 
     return {
       success: false,

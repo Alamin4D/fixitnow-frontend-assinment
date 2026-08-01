@@ -4,43 +4,41 @@ import { cookies } from "next/headers";
 
 const BACKEND_API_URL = process.env.BACKEND_API_URL!;
 
-export const getTechnicianBookings = async () => {
+export const deleteCategory = async (id: string) => {
   const token = (await cookies()).get("accessToken")?.value;
 
   try {
     const res = await fetch(
-      `${BACKEND_API_URL}/api/bookings`,
+      `${BACKEND_API_URL}/api/categories/${id}`,
       {
-        method: "GET",
+        method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        cache: "no-store",
       }
     );
 
     const data = await res.json();
 
     if (!res.ok) {
-      return {
-        success: false,
-        message: data.message || "Failed to fetch bookings.",
-        data: [],
-      };
+      throw new Error(
+        data.message || "Failed to delete category"
+      );
     }
 
     return {
       success: true,
-      message: data.message,
-      data: data.data,
+      message: "Category deleted successfully",
     };
   } catch (error) {
-    console.error("Get Technician Bookings Error:", error);
+    console.error("Delete category error:", error);
 
     return {
       success: false,
-      message: "Something went wrong.",
-      data: [],
+      message:
+        error instanceof Error
+          ? error.message
+          : "Something went wrong",
     };
   }
 };
