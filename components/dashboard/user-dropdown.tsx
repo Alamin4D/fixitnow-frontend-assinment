@@ -126,6 +126,7 @@ export default function UserDropdown({
                 </DropdownMenuGroup>
 
                 <DropdownMenuSeparator />
+                
 
                 <DropdownMenuItem asChild>
                     <LogoutButton
