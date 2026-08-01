@@ -146,6 +146,14 @@ export default function BookingsTable({
                                         <Eye className="h-4 w-4" />
                                     </Link>
                                 </Button>
+
+                                {booking.status === "ACCEPTED" && (
+                                    <Button size="sm" asChild>
+                                        <Link href={`/customer-dashboard/payment/${booking.id}`}>
+                                            Pay Now
+                                        </Link>
+                                    </Button>
+                                )}
                             </TableCell>
                         </TableRow>
                     ))}

@@ -37,11 +37,11 @@ const customerLinks = [
     href: "/customer-dashboard/bookings",
     icon: CalendarCheck,
   },
-  {
-    title: "Profile",
-    href: "/customer-dashboard/profile",
-    icon: UserCircle,
-  },
+  // {
+  //   title: "Profile",
+  //   href: "/customer-dashboard/profile",
+  //   icon: UserCircle,
+  // },
   {
     title: "Payment",
     href: "/customer-dashboard/payment",

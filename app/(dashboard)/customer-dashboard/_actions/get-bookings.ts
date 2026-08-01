@@ -9,7 +9,7 @@ export async function getBookings() {
     `${process.env.BACKEND_API_URL}/api/bookings`,
     {
       headers: {
-        Authorization: token ?? "",
+        Authorization: `Bearer ${token}`,
       },
       cache: "no-store",
     }
