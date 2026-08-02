@@ -19,12 +19,21 @@ interface TechnicianProfile {
 }
 
 interface TechnicianProfileCardProps {
-  profile: TechnicianProfile;
+  profile: TechnicianProfile | null;
 }
 
 export default function TechnicianProfileCard({
   profile,
 }: TechnicianProfileCardProps) {
+  if (!profile) {
+    return (
+      <Card>
+        <CardContent className="p-6 text-center">
+          Profile not found.
+        </CardContent>
+      </Card>
+    );
+  }
   return (
     <Card>
       <CardHeader className="flex flex-col items-center gap-4">
