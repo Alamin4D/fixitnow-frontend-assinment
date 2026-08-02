@@ -9,7 +9,7 @@ export const deleteCategory = async (id: string) => {
 
   try {
     const res = await fetch(
-      `${BACKEND_API_URL}/api/categories/${id}`,
+      `${BACKEND_API_URL}/api/admin/categories/${id}`,
       {
         method: "DELETE",
         headers: {

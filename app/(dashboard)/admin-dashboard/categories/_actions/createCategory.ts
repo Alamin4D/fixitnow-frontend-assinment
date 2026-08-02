@@ -10,7 +10,7 @@ export const createCategory = async (values: {
   const token = (await cookies()).get("accessToken")?.value;
 
   try {
-    const res = await fetch(`${BACKEND_API_URL}/api/categories`, {
+    const res = await fetch(`${BACKEND_API_URL}/api/admin/categories`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

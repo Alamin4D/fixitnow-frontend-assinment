@@ -14,7 +14,7 @@ export const updateCategory = async (
 
   try {
     const res = await fetch(
-      `${BACKEND_API_URL}/api/categories/${id}`,
+      `${BACKEND_API_URL}/api/admin/categories/${id}`,
       {
         method: "PATCH",
         headers: {

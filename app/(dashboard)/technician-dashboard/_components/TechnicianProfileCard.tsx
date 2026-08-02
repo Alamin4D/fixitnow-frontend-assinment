@@ -31,12 +31,12 @@ export default function TechnicianProfileCard({
         <Avatar className="h-24 w-24">
           <AvatarImage src={profile.user.image} />
           <AvatarFallback>
-            {profile.user.name.slice(0, 2).toUpperCase()}
+            {profile?.user?.name.slice(0, 2).toUpperCase()}
           </AvatarFallback>
         </Avatar>
 
         <div className="text-center">
-          <CardTitle>{profile.user.name}</CardTitle>
+          <CardTitle>{profile?.user?.name}</CardTitle>
           <p className="text-muted-foreground mt-1 text-sm">
             Professional Technician
           </p>
