@@ -3,18 +3,10 @@ import { getCategories } from "./_actions/getCategories";
 import CategoriesTable from "./_components/categories-table";
 import CreateCategoryDialog from "./_components/create-category-dialog";
 
-import { createCategory } from "./_actions/createCategory";
-// import { updateCategory } from "./_actions/updateCategory";
-import { deleteCategory } from "./_actions/deleteCategory";
-
 const CategoriesPage = async () => {
   const result = await getCategories();
 
-  const categories = result.success
-    ? result.data
-    : [];
-
-    
+  const categories = result.success ? result.data : [];
 
   return (
     <div className="space-y-6 p-6">
@@ -29,15 +21,11 @@ const CategoriesPage = async () => {
           </p>
         </div>
 
-        <CreateCategoryDialog
-          onCreate={createCategory}
-        />
+        <CreateCategoryDialog />
       </div>
 
       <CategoriesTable
         categories={categories}
-        // onUpdate={updateCategory}
-        onDelete={deleteCategory}
       />
     </div>
   );

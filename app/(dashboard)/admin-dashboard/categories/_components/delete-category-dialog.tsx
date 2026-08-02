@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Trash2 } from "lucide-react";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -16,23 +17,33 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
+import { deleteCategory } from "../_actions/deleteCategory";
+import { useRouter } from "next/navigation";
+
 interface DeleteCategoryDialogProps {
   categoryId: string;
   categoryName: string;
-  onDelete: (id: string) => Promise<void> | void;
 }
 
 const DeleteCategoryDialog = ({
   categoryId,
   categoryName,
-  onDelete,
 }: DeleteCategoryDialogProps) => {
   const [isDeleting, setIsDeleting] = useState(false);
+  const router = useRouter();
 
   const handleDelete = async () => {
     try {
       setIsDeleting(true);
-      await onDelete(categoryId);
+
+      const result = await deleteCategory(categoryId);
+
+      if (result.success) {
+        toast.success(result.message);
+        router.refresh();
+      } else {
+        toast.error(result.message);
+      }
     } finally {
       setIsDeleting(false);
     }
@@ -54,7 +65,10 @@ const DeleteCategoryDialog = ({
 
           <AlertDialogDescription>
             Are you sure you want to delete{" "}
-            <span className="font-semibold">{categoryName}</span>?
+            <span className="font-semibold">
+              {categoryName}
+            </span>
+            ?
             <br />
             This action cannot be undone.
           </AlertDialogDescription>

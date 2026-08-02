@@ -1,46 +1,43 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
-const BACKEND_API_URL = process.env.BACKEND_API_URL!;
-
-export const createCategory = async (values: {
+export const createCategory = async (payload: {
   name: string;
+  description: string;
+  icon: string;
 }) => {
-  const token = (await cookies()).get("accessToken")?.value;
-
   try {
-    const res = await fetch(`${BACKEND_API_URL}/api/admin/categories`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(values),
-    });
+    const token = (await cookies()).get("accessToken")?.value;
+    const res = await fetch(
+      `${process.env.BACKEND_API_URL}/api/admin/categories`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(payload),
+      }
+    );
 
-    const data = await res.json();
+    const result = await res.json();
 
     if (!res.ok) {
-      throw new Error(
-        data.message || "Failed to create category"
-      );
+      return {
+        success: false,
+        message: result.message,
+      };
     }
 
-    return {
-      success: true,
-      data: data.data || data,
-      message: "Category created successfully",
-    };
-  } catch (error) {
-    console.error("Create category error:", error);
+    revalidatePath("/admin-dashboard/categories");
 
+    return result;
+  } catch {
     return {
       success: false,
-      message:
-        error instanceof Error
-          ? error.message
-          : "Something went wrong",
+      message: "Something went wrong.",
     };
   }
 };

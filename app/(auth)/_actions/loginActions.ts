@@ -50,65 +50,94 @@ export async function loginAction(
     if (!res.ok) {
       return {
         success: false,
-        message: result.message ?? "Login failed",
+        message: result.message || "Login failed",
       };
     }
 
+
     const cookieStore = await cookies();
 
-    // Access Token
-    cookieStore.set("accessToken", result.data.accessToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/",
-      maxAge: 60 * 60 * 24,
-    });
 
-    // Role
-    cookieStore.set("role", result.data.user.role, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/",
-      maxAge: 60 * 60 * 24,
-    });
+    const accessToken = result.data.accessToken;
+    const user = result.data.user;
 
-    cookieStore.set("name", result.data.user.name, {
-      httpOnly: true,
-      sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
-      path: "/",
-    });
+    console.log("COOKIE SET TOKEN:", accessToken);
+    console.log("COOKIE SET ROLE:", user.role);
 
-    cookieStore.set("email", result.data.user.email, {
-      httpOnly: true,
-      sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
-      path: "/",
-    });
 
-    // Refresh Token (if exists)
-    if (result.data.refreshToken) {
-      cookieStore.set("refreshToken", result.data.refreshToken, {
+    if (!accessToken || !user) {
+      return {
+        success: false,
+        message: "Invalid login response",
+      };
+    }
+
+
+    cookieStore.set(
+      "accessToken",
+      accessToken,
+      {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        secure: false,
         sameSite: "lax",
         path: "/",
-        maxAge: 60 * 60 * 24 * 7,
-      });
-    }
+        maxAge: 60 * 60 * 24,
+      }
+    );
+
+
+    cookieStore.set(
+      "role",
+      user.role,
+      {
+        httpOnly: true,
+        secure: false,
+        sameSite: "lax",
+        path: "/",
+        maxAge: 60 * 60 * 24,
+      }
+    );
+
+
+    cookieStore.set(
+      "name",
+      user.name,
+      {
+        httpOnly: true,
+        sameSite: "lax",
+        secure: false,
+        path: "/",
+      }
+    );
+
+
+    cookieStore.set(
+      "email",
+      user.email,
+      {
+        httpOnly: true,
+        sameSite: "lax",
+        secure: false,
+        path: "/",
+      }
+    );
+
+
     return {
       success: true,
-      message: result.message || "Login successful",
-      role: result.data.user.role,
+      message:
+        result.message || "Login successful",
+      role: user.role,
     };
+
+
   } catch (error) {
-    console.error(error);
+    console.error("Login error:", error);
 
     return {
       success: false,
-      message: "Something went wrong. Please try again.",
+      message:
+        "Something went wrong. Please try again.",
     };
   }
 }

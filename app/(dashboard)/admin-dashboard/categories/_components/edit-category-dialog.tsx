@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Pencil } from "lucide-react";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -16,20 +17,19 @@ import CategoryForm, {
   CategoryFormValues,
 } from "./category-form";
 
+import { updateCategory } from "../_actions/updateCategory";
+
 interface EditCategoryDialogProps {
   category: {
     id: string;
     name: string;
+    description: string;
+    icon: string;
   };
-  onUpdate: (
-    id: string,
-    values: CategoryFormValues
-  ) => Promise<void> | void;
 }
 
 const EditCategoryDialog = ({
   category,
-  onUpdate,
 }: EditCategoryDialogProps) => {
   const [open, setOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -40,30 +40,48 @@ const EditCategoryDialog = ({
     try {
       setIsSubmitting(true);
 
-      await onUpdate(category.id, values);
+      const result = await updateCategory(
+        category.id,
+        values
+      );
 
-      setOpen(false);
+      if (result.success) {
+        toast.success(result.message);
+        setOpen(false);
+      } else {
+        toast.error(result.message);
+      }
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog
+      open={open}
+      onOpenChange={setOpen}
+    >
       <DialogTrigger asChild>
-        <Button size="icon" variant="outline">
+        <Button
+          size="icon"
+          variant="outline"
+        >
           <Pencil className="h-4 w-4" />
         </Button>
       </DialogTrigger>
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Edit Category</DialogTitle>
+          <DialogTitle>
+            Edit Category
+          </DialogTitle>
         </DialogHeader>
 
         <CategoryForm
           defaultValues={{
             name: category.name,
+            description: category.description,
+            icon: category.icon,
           }}
           onSubmit={handleSubmit}
           isSubmitting={isSubmitting}

@@ -1,9 +1,25 @@
-import React from 'react'
+import { getCustomerBookings } from "./_actions/getCustomerBookings";
+import CustomerStats from "./_components/CustomerStats";
 
-const CustomerDashboardPage = () => {
+
+
+const CustomerDashboardPage = async () => {
+
+  const result = await getCustomerBookings();
+
+  const bookings = result.data;
+
+
   return (
-    <div>CustomerDashboard Page</div>
-  )
-}
+    <div className="space-y-6 p-6">
 
-export default CustomerDashboardPage
+      <CustomerStats 
+        bookings={bookings}
+      />
+
+    </div>
+  );
+};
+
+
+export default CustomerDashboardPage;

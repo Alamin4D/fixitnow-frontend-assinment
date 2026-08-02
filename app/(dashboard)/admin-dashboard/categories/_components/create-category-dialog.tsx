@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Plus } from "lucide-react";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -15,34 +16,31 @@ import {
 import CategoryForm, {
   CategoryFormValues,
 } from "./category-form";
-import { toast } from "sonner";
 
+import { createCategory } from "../_actions/createCategory";
 
-interface CreateCategoryDialogProps {
-  onCreate: (
-    values: { name: string }
-  ) => Promise<{
-    success: boolean;
-    data?: any;
-    message: string;
-  }>;
-}
-
-const CreateCategoryDialog = ({
-  onCreate,
-}: CreateCategoryDialogProps) => {
+const CreateCategoryDialog = () => {
   const [open, setOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (values: { name: string }) => {
-  const result = await onCreate(values);
+  const handleSubmit = async (
+    values: CategoryFormValues
+  ) => {
+    try {
+      setIsSubmitting(true);
 
-  if (result.success) {
-    toast.success(result.message);
-  } else {
-    toast.error(result.message);
-  }
-};
+      const result = await createCategory(values);
+
+      if (result.success) {
+        toast.success(result.message);
+        setOpen(false);
+      } else {
+        toast.error(result.message);
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -55,7 +53,9 @@ const CreateCategoryDialog = ({
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Create Category</DialogTitle>
+          <DialogTitle>
+            Create Category
+          </DialogTitle>
         </DialogHeader>
 
         <CategoryForm

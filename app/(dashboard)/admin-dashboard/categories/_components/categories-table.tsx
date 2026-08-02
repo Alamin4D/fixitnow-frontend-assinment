@@ -10,75 +10,84 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Pencil, Trash2 } from "lucide-react";
+import { Pencil } from "lucide-react";
+import DeleteCategoryDialog from "./delete-category-dialog";
+import CategoryActions from "./category-actions";
 
 type Category = {
   id: string;
   name: string;
-  slug: string;
+  description: string;
+  icon: string;
   isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+  _count: {
+    services: number;
+  };
 };
 
 interface CategoriesTableProps {
   categories: Category[];
   onEdit?: (category: Category) => void;
-  onDelete?: (id: string) => void;
+  onDelete?: (id: string) => Promise<{
+    success: boolean;
+    message: string;
+  }>;
 }
 
-const CategoriesTable = ({
+export default function CategoriesTable({
   categories,
   onEdit,
   onDelete,
-}: CategoriesTableProps) => {
+}: CategoriesTableProps) {
   return (
     <div className="rounded-lg border">
       <Table>
         <TableHeader>
           <TableRow>
+            <TableHead>Icon</TableHead>
             <TableHead>Name</TableHead>
-            <TableHead>Slug</TableHead>
+            <TableHead>Description</TableHead>
+            <TableHead>Services</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead className="w-[120px] text-right">
-              Actions
-            </TableHead>
+            <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
 
         <TableBody>
-          {categories.length > 0 ? (
+          {categories.length ? (
             categories.map((category) => (
               <TableRow key={category.id}>
+                <TableCell>{category.icon}</TableCell>
+
                 <TableCell className="font-medium">
                   {category.name}
                 </TableCell>
 
-                <TableCell>{category.slug}</TableCell>
+                <TableCell>{category.description}</TableCell>
 
                 <TableCell>
-                  <Badge
-                    variant={category.isActive ? "default" : "secondary"}
-                  >
-                    {category.isActive ? "Active" : "Inactive"}
-                  </Badge>
+                  {category._count.services}
                 </TableCell>
 
                 <TableCell>
-                  <div className="flex justify-end gap-2">
-                    <Button
-                      size="icon"
-                      variant="outline"
-                      onClick={() => onEdit?.(category)}
-                    >
-                      <Pencil className="h-4 w-4" />
-                    </Button>
+                  <Badge
+                    variant={
+                      category.isActive
+                        ? "default"
+                        : "secondary"
+                    }
+                  >
+                    {category.isActive
+                      ? "Active"
+                      : "Inactive"}
+                  </Badge>
+                </TableCell>
 
-                    <Button
-                      size="icon"
-                      variant="destructive"
-                      onClick={() => onDelete?.(category.id)}
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
+                <TableCell className="text-right">
+                  <div className="flex justify-end gap-2">
+                    <CategoryActions category={category} />
                   </div>
                 </TableCell>
               </TableRow>
@@ -86,8 +95,8 @@ const CategoriesTable = ({
           ) : (
             <TableRow>
               <TableCell
-                colSpan={4}
-                className="py-8 text-center text-muted-foreground"
+                colSpan={6}
+                className="py-8 text-center"
               >
                 No categories found.
               </TableCell>
@@ -97,6 +106,4 @@ const CategoriesTable = ({
       </Table>
     </div>
   );
-};
-
-export default CategoriesTable;
+}

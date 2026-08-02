@@ -8,68 +8,63 @@ const PUBLIC_ROUTES = [
   "/register",
 ];
 
-const AUTH_ROUTES = ["/login", "/register"];
-
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const token = request.cookies.get("accessToken")?.value;
   const role = request.cookies.get("role")?.value;
 
-  // Allow public routes
-  const isPublicRoute =
+
+  const isPublic =
     PUBLIC_ROUTES.includes(pathname) ||
     pathname.startsWith("/services/") ||
     pathname.startsWith("/technicians/");
 
-  if (isPublicRoute) {
+
+  // Public route
+  if (isPublic) {
     return NextResponse.next();
   }
 
-  // Prevent logged in users from auth pages
-  if (AUTH_ROUTES.includes(pathname) && token) {
-    return NextResponse.redirect(new URL("/", request.url));
-  }
 
-  // Require authentication
+  // No login
   if (!token) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    const loginUrl = new URL(
+      "/login",
+      request.url
+    );
+
+
+    loginUrl.searchParams.set(
+      "redirect",
+      pathname
+    );
+
+
+    return NextResponse.redirect(loginUrl);
   }
 
-  // Customer Routes
-  if (pathname.startsWith("/customer-dashboard")) {
+
+
+  // Customer
+  if (
+    pathname.startsWith("/customer-dashboard")
+  ) {
     if (role !== "CUSTOMER") {
-      return NextResponse.redirect(new URL("/unauthorized", request.url));
+      return NextResponse.redirect(
+        new URL("/unauthorized", request.url)
+      );
     }
   }
 
-  // Technician Routes
-  if (pathname.startsWith("/technician-dashboard")) {
-    if (role !== "TECHNICIAN") {
-      return NextResponse.redirect(new URL("/unauthorized", request.url));
-    }
-  }
-
-  // Admin Routes
-  if (pathname.startsWith("/admin-dashboard")) {
-    if (role !== "ADMIN") {
-      return NextResponse.redirect(new URL("/unauthorized", request.url));
-    }
-  }
 
   return NextResponse.next();
 }
 
+
+
 export const config = {
   matcher: [
-    /*
-     * Skip:
-     * - API Routes
-     * - Next.js internals
-     * - Static files
-     * - Images
-     * - Favicon
-     */
     "/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)",
   ],
 };

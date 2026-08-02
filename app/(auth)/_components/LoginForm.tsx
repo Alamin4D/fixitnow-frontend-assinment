@@ -1,58 +1,99 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { loginAction, LoginState } from "../_actions/loginActions";
+
+import { loginAction } from "../_actions/loginActions";
 import { toast } from "sonner";
 
-const initialState: LoginState = {
-    success: false,
-    message: "",
-};
-
 export default function LoginForm() {
-    const router = useRouter()
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
+    const redirect =
+        searchParams.get("redirect");
+
+    const [loading, setLoading] = useState(false);
 
 
-    const [state, action, pending] = useActionState(
-        loginAction.bind(null),
-        initialState
-    );
+    async function handleSubmit(
+        e: React.FormEvent<HTMLFormElement>
+    ) {
+        e.preventDefault();
 
-    useEffect(() => {
-        if (!state.message) return;
 
-        if (state.success) {
-            toast.success(state.message);
+        const formData = new FormData(e.currentTarget);
 
-            switch (state.role) {
+
+        try {
+            setLoading(true);
+
+
+            const result = await loginAction(
+                {
+                    success: false,
+                    message: "",
+                },
+                formData
+            );
+
+
+            if (!result.success) {
+                toast.error(result.message);
+                return;
+            }
+
+
+            toast.success(result.message);
+
+
+            router.refresh();
+
+
+            if (redirect) {
+                router.replace(redirect);
+                return;
+            }
+
+
+            switch (result.role) {
                 case "ADMIN":
-                    router.push("/admin-dashboard");
+                    router.replace("/admin-dashboard");
                     break;
 
                 case "TECHNICIAN":
-                    router.push("/technician-dashboard");
+                    router.replace("/technician-dashboard");
                     break;
 
                 case "CUSTOMER":
-                    router.push("/customer-dashboard");
+                    router.replace("/customer-dashboard");
                     break;
 
                 default:
-                    router.push("/");
+                    router.replace("/");
             }
-        } else {
-            toast.error(state.message);
+
+
+        } catch (error) {
+            toast.error(
+                "Something went wrong"
+            );
+
+        } finally {
+            setLoading(false);
         }
-    }, [state, router]);
+    }
+
 
     return (
-        <form action={action}>
+        <form onSubmit={handleSubmit}>
             <Card className="space-y-5 p-6">
+
 
                 <div className="space-y-2">
                     <Label>Email</Label>
@@ -62,13 +103,8 @@ export default function LoginForm() {
                         type="email"
                         placeholder="john@gmail.com"
                     />
-
-                    {state.errors?.email && (
-                        <p className="text-sm text-red-500">
-                            {state.errors.email[0]}
-                        </p>
-                    )}
                 </div>
+
 
                 <div className="space-y-2">
                     <Label>Password</Label>
@@ -78,23 +114,25 @@ export default function LoginForm() {
                         type="password"
                         placeholder="********"
                     />
-
-                    {state.errors?.password && (
-                        <p className="text-sm text-red-500">
-                            {state.errors.password[0]}
-                        </p>
-                    )}
                 </div>
 
+
                 <Button
+                    type="submit"
                     className="w-full"
-                    disabled={pending}
+                    disabled={loading}
                 >
-                    {pending ? "Logging in..." : "Login"}
+                    {loading
+                        ? "Logging in..."
+                        : "Login"}
                 </Button>
 
+
                 <div className="text-center text-sm">
-                    <span className="text-muted-foreground">Don&apos;t have an account? </span>
+                    <span className="text-muted-foreground">
+                        Don&apos;t have an account?{" "}
+                    </span>
+
                     <a
                         href="/register"
                         className="font-medium text-primary hover:underline"
@@ -102,6 +140,8 @@ export default function LoginForm() {
                         Sign up
                     </a>
                 </div>
+
+
             </Card>
         </form>
     );

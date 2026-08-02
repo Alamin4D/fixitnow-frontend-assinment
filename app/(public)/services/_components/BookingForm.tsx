@@ -37,25 +37,20 @@ export default function BookingForm({ serviceId }: BookingFormProps) {
     },
   });
 
-  const onSubmit = (values: BookingFormValues) => {
-    startTransition(async () => {
-      const payload = {
-        serviceId,
-        ...values,
-      };
+  const onSubmit = async (values: BookingFormValues) => {
+    const payload = {
+      serviceId,
+      ...values,
+    };
 
+    const res = await createBooking(payload);
 
-      const res = await createBooking(payload);
-
-      if (res.success) {
-        toast.success("Booking request submitted successfully!");
-        reset();
-        router.push("/customer-dashboard/bookings");
-        router.refresh();
-      } else {
-        toast.error(res.message || "Failed to create booking.");
-      }
-    });
+    if (res.success) {
+      toast.success("Booking request submitted successfully!");
+      router.push("/customer-dashboard/bookings");
+    } else {
+      toast.error(res.message || "Failed to create booking.");
+    }
   };
 
   return (
