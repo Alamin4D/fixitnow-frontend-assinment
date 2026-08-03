@@ -9,11 +9,11 @@ type Props = {
     }>;
 };
 
+
 export default async function TechnicianPage({
     params,
 }: Props) {
     const { id } = await params;
-
     const technician = await getTechnicianById(id);
 
     return (

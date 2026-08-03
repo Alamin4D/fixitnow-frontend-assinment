@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 const PaymentCancelPage = () => {
   const router = useRouter();
 
+  
   return (
     <div className="flex min-h-[70vh] items-center justify-center p-6">
       <div className="w-full max-w-md rounded-xl border bg-card p-8 text-center shadow-sm">

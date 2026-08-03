@@ -10,7 +10,6 @@ interface BookingEmptyProps {
 export default function BookingEmpty({
     role = "CUSTOMER",
 }: BookingEmptyProps) {
-
     const isTechnician = role === "TECHNICIAN";
 
     return (

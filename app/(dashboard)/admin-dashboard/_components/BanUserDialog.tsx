@@ -35,6 +35,7 @@ export default function BanUserDialog({
       setLoading(false);
     }
   };
+  
 
   return (
     <AlertDialog>

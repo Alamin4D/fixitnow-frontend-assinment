@@ -17,6 +17,7 @@ const PaymentSkeleton = () => {
               <Skeleton className="h-5 w-40" />
             </div>
           ))}
+          
 
           <div className="border-t pt-5">
             <div className="flex items-center justify-between">

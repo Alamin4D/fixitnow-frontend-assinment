@@ -8,11 +8,11 @@ export async function getTechnicianById(id: string) {
     }
   );
 
+
   if (!res.ok) {
     throw new Error("Failed to fetch technician");
   }
 
   const result = await res.json();
-
   return result.data;
 }

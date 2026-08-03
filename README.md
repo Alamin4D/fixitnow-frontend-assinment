@@ -8,9 +8,8 @@ A modern, responsive, and role-based home service marketplace built with **Next.
 
 ## 🌐 Live Demo
 
-- **Frontend:** https://your-frontend-url.vercel.app
-- **Backend API:** https://your-backend-api-url.com
-- **Backend Repository:** https://github.com/your-username/fixitnow-backend
+- **Frontend:** https://fixitnow-frontend-assinment.vercel.app/
+- **Backend API:** https://fixitnow-backend-assinment.vercel.app/
 
 ---
 

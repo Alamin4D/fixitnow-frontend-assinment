@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
+
 export default function ServiceDetails({
   service,
 }: {
@@ -26,7 +27,6 @@ export default function ServiceDetails({
           <h1 className="text-4xl font-bold">
             {service.title}
           </h1>
-
           <p className="mt-2 text-muted-foreground">
             {service.category.name}
           </p>

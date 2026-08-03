@@ -73,6 +73,7 @@ function DetailRow({
   );
 }
 
+
 export default function BookingDetailsDialog({
   open,
   onOpenChange,

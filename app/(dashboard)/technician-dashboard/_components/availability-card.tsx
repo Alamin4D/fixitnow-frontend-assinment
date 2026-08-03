@@ -13,6 +13,7 @@ type Availability = {
   isAvailable: boolean;
 };
 
+
 type Props = {
   availability: Availability;
   onEdit?: (id: string) => void;

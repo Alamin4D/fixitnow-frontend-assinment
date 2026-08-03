@@ -5,6 +5,7 @@ import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { updateBookingStatus } from "../_actions/update-booking-status";
+import { useRouter } from "next/navigation";
 
 interface Booking {
   id: string;
@@ -26,6 +27,7 @@ export default function BookingActionButtons({
   booking,
 }: BookingActionButtonsProps) {
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   const handleUpdate = (
     status: "ACCEPTED" | "DECLINED" | "IN_PROGRESS" | "COMPLETED"
@@ -35,11 +37,13 @@ export default function BookingActionButtons({
 
       if (result.success) {
         toast.success(result.message);
+        router.refresh();
       } else {
         toast.error(result.message);
       }
     });
   };
+  
 
   switch (booking.status) {
     case "REQUESTED":

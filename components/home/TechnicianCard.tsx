@@ -10,6 +10,7 @@ import {
   Star,
 } from "lucide-react";
 
+
 export default function TechnicianCard({
   technician,
 }: {

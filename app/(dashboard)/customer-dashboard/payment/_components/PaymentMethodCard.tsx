@@ -8,6 +8,7 @@ interface PaymentMethodCardProps {
   onCheckout: () => void;
 }
 
+
 const PaymentMethodCard = ({
   isLoading = false,
   onCheckout,

@@ -11,6 +11,7 @@ interface PaymentStatusBadgeProps {
   status: PaymentStatus | string;
 }
 
+
 const statusStyles: Record<
   string,
   {

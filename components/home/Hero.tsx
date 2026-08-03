@@ -53,6 +53,7 @@ export default function Hero() {
                                 >
                                     Explore Services
                                 </Link>
+                                
 
                                 <Link
                                     href="/auth/register"

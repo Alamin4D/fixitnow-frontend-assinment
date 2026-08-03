@@ -16,6 +16,7 @@ const CategoriesPage = async () => {
             Categories
           </h1>
 
+
           <p className="text-muted-foreground">
             Manage service categories.
           </p>

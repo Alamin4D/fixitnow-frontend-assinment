@@ -10,7 +10,6 @@ interface StatsCardProps {
   title: string;
   value: string | number;
   icon: LucideIcon;
-
   description?: string;
 
   trend?: {

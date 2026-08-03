@@ -8,6 +8,7 @@ export default function NotFoundPage() {
       <p className="mt-3 text-muted-foreground">
         The page you are looking for does not exist.
       </p>
+      
       <Button className="mt-6" asChild>
         <Link href="/">Go Home</Link>
       </Button>

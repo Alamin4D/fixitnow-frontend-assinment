@@ -31,17 +31,11 @@ export async function getBookings() {
 
     customerName:
       booking.customer?.name ?? "N/A",
-
     bookingDate: booking.scheduledDate,
-
     bookingTime: booking.scheduledTime,
-
     totalPrice: booking.totalAmount,
-
     status: booking.status,
-
     address: booking.address,
-
     notes: booking.notes,
   }));
 }

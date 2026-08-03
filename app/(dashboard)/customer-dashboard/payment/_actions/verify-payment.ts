@@ -19,6 +19,7 @@ export const verifyPayment = async (sessionId: string) => {
       }),
       cache: "no-store",
     });
+    
 
     const result = await res.json();
 

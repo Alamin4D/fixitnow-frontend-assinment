@@ -67,6 +67,7 @@ export default function TechnicianBookingsTable({
       </div>
     );
   }
+  
 
   return (
     <div className="rounded-lg border">

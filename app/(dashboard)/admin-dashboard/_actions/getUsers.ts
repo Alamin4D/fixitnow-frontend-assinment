@@ -5,7 +5,6 @@ import { cookies } from "next/headers";
 export const getUsers = async () => {
   try {
     const cookieStore = await cookies();
-
     const token = cookieStore.get("accessToken")?.value;
 
     const res = await fetch(

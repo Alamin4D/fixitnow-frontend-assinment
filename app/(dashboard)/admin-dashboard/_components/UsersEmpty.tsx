@@ -8,6 +8,7 @@ interface UsersEmptyProps {
   onReset?: () => void;
 }
 
+
 export default function UsersEmpty({
   message = "There are no users available.",
   onReset,

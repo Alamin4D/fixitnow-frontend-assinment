@@ -11,6 +11,7 @@ export type BookingStatus =
   | "COMPLETED"
   | "CANCELLED";
 
+  
 interface BookingStatusBadgeProps {
   status: BookingStatus;
 }

@@ -9,6 +9,7 @@ export const updateBookingStatus = async (
 ) => {
   const token = (await cookies()).get("accessToken")?.value;
 
+
   const res = await fetch(
     `${process.env.BACKEND_API_URL}/api/technician/bookings/${bookingId}`,
     {
@@ -28,6 +29,5 @@ export const updateBookingStatus = async (
   }
 
   revalidatePath("/technician-dashboard/bookings");
-
   return result;
 };

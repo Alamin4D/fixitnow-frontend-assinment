@@ -37,6 +37,7 @@ export interface User {
   };
 }
 
+
 interface UsersTableProps {
   users: User[];
   onBan: (id: string) => void;

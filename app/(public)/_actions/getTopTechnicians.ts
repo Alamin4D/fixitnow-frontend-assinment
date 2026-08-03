@@ -14,6 +14,5 @@ export async function getTopTechnicians() {
   }
 
   const data = await res.json();
-
   return data.data as ITechnician[];
 }

@@ -16,6 +16,7 @@ export const getCategories = async () => {
       },
       cache: "no-store",
     });
+    
 
     const data = await res.json();
 

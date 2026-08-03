@@ -3,6 +3,7 @@ import Container from "./Container";
 import Logo from "./Logo";
 
 export default function Footer() {
+  
   return (
     <footer className="border-t bg-muted/40">
       <Container className="py-10">

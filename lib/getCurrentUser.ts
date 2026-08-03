@@ -8,9 +8,9 @@ export interface CurrentUser extends JwtPayload {
   role: string;
 }
 
+
 export async function getCurrentUser(): Promise<CurrentUser | null> {
   const cookieStore = await cookies();
-
   const token = cookieStore.get("accessToken")?.value;
 
   if (!token) return null;

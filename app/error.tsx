@@ -11,10 +11,10 @@ export default function Error({
         Something went wrong
       </h2>
 
+
       <button
         onClick={() => reset()}
-        className="rounded bg-primary px-5 py-2 text-white"
-      >
+        className="rounded bg-primary px-5 py-2 text-white">
         Try Again
       </button>
     </div>

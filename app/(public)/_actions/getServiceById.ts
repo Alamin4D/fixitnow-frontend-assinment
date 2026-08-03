@@ -7,6 +7,7 @@ export async function getServiceById(id: string) {
       cache: "no-store",
     }
   );
+  
 
   if (!res.ok) {
     throw new Error("Failed to fetch service");

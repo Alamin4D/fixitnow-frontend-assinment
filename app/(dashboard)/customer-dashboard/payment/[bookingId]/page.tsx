@@ -8,9 +8,9 @@ interface PageProps {
   }>;
 }
 
+
 const PaymentDetailsPage = async ({ params }: PageProps) => {
   const { bookingId } = await params;
-
   const booking = await getBookingById(bookingId);
 
   return (

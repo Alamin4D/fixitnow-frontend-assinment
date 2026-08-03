@@ -1,14 +1,9 @@
 
 
-import {
-  CalendarCheck,
-  CircleDollarSign,
-  Clock3,
-  CheckCircle2,
-} from "lucide-react";
 import { getTechnicianProfile } from "../_actions/get-technician-profile";
 import { getTechnicianAvailability } from "../_actions/get-technician-availability";
 import { getTechnicianBookings } from "../_actions/get-technician-bookings";
+
 import TechnicianStatsCard from "../_components/TechnicianStatsCard";
 import TechnicianProfileCard from "../_components/TechnicianProfileCard";
 import TechnicianAvailabilityCard from "../_components/TechnicianAvailabilityCard";
@@ -16,7 +11,7 @@ import TechnicianBookingsTable from "../_components/TechnicianBookingsTable";
 
 export const dynamic = "force-dynamic";
 
-const TechnicianDashboardPage = async () => {
+const ProfilePage = async () => {
   const [profileResult, availabilityResult, bookingsResult] =
     await Promise.all([
       getTechnicianProfile(),
@@ -52,36 +47,39 @@ const TechnicianDashboardPage = async () => {
         </p>
       </div>
 
-      {/* <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+
+      {/* Stats */}
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <TechnicianStatsCard
           title="Total Bookings"
           value={totalBookings}
-          icon={CalendarCheck}
+          icon="calendar"
         />
 
         <TechnicianStatsCard
           title="Pending"
           value={pendingBookings}
-          icon={Clock3}
+          icon="clock"
         />
 
         <TechnicianStatsCard
           title="Completed"
           value={completedBookings}
-          icon={CheckCircle2}
+          icon="check"
         />
 
         <TechnicianStatsCard
           title="Total Earnings"
-          value={`{totalEarnings}`}
-          icon={CircleDollarSign}
+          value={`৳${totalEarnings}`}
+          icon="dollar"
         />
-      </div> */}
+      </div>
 
+      {/* Profile & Availability */}
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-1">
           <TechnicianProfileCard
-            profile={profileResult.data}
+            profile={profileResult.success ? profileResult.data : null}
           />
         </div>
 
@@ -92,8 +90,11 @@ const TechnicianDashboardPage = async () => {
         </div>
       </div>
 
+      {/* Recent Bookings */}
       <div>
-        <h2 className="mb-4 text-xl font-semibold">Recent Bookings</h2>
+        <h2 className="mb-4 text-xl font-semibold">
+          Recent Bookings
+        </h2>
 
         <TechnicianBookingsTable bookings={bookings} />
       </div>
@@ -101,4 +102,4 @@ const TechnicianDashboardPage = async () => {
   );
 };
 
-export default TechnicianDashboardPage;
+export default ProfilePage;

@@ -6,6 +6,7 @@ interface BookingLoadingProps {
   rows?: number;
 }
 
+
 export default function BookingLoading({
   rows = 5,
 }: BookingLoadingProps) {

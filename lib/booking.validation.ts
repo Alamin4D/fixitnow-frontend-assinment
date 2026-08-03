@@ -7,4 +7,5 @@ export const bookingSchema = z.object({
   notes: z.string().optional(),
 });
 
+
 export type BookingFormValues = z.infer<typeof bookingSchema>;

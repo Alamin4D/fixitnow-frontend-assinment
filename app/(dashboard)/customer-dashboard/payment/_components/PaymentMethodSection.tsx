@@ -25,6 +25,7 @@ const PaymentMethodSection = ({ bookingId }: Props) => {
             window.location.href = result.data.checkoutUrl;
         });
     };
+    
 
     return (
         <PaymentMethodCard

@@ -17,6 +17,7 @@ export const createCheckout = async (bookingId: string) => {
       body: JSON.stringify({ bookingId }),
       cache: "no-store",
     });
+    
 
     const result = await res.json();
 

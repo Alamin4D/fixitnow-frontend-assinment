@@ -22,6 +22,7 @@ interface CustomerStatsProps {
     bookings: Booking[];
 }
 
+
 const CustomerStats = ({ bookings }: CustomerStatsProps) => {
     const totalBookings = bookings.length;
 

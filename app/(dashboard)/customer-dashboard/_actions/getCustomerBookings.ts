@@ -20,6 +20,7 @@ export const getCustomerBookings = async () => {
 
     const data = await res.json();
 
+    
     return {
       success: true,
       data: data.data || [],

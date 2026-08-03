@@ -12,6 +12,7 @@ interface Availability {
   isAvailable: boolean;
 }
 
+
 interface TechnicianAvailabilityCardProps {
   availability: Availability[];
 }

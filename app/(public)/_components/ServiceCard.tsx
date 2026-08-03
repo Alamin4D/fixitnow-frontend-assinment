@@ -14,6 +14,7 @@ interface ServiceCardProps {
   service: any;
 }
 
+
 export default function ServiceCard({
   service,
 }: ServiceCardProps) {

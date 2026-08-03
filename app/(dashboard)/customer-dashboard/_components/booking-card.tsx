@@ -25,6 +25,7 @@ export interface BookingCardProps {
   showTechnician?: boolean;
 }
 
+
 const getStatusVariant = (status: BookingStatus) => {
   switch (status) {
     case "COMPLETED":

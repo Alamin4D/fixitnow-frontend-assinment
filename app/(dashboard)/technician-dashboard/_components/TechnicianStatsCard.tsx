@@ -1,33 +1,44 @@
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { LucideIcon } from "lucide-react";
+import {
+  CalendarCheck,
+  Clock3,
+  CheckCircle2,
+  CircleDollarSign,
+} from "lucide-react";
+
 
 interface TechnicianStatsCardProps {
   title: string;
   value: number | string;
-  icon: LucideIcon;
+  icon: "calendar" | "clock" | "check" | "dollar";
   description?: string;
 }
 
 export default function TechnicianStatsCard({
   title,
   value,
-  icon: Icon,
+  icon,
   description,
 }: TechnicianStatsCardProps) {
+  const icons = {
+    calendar: CalendarCheck,
+    clock: Clock3,
+    check: CheckCircle2,
+    dollar: CircleDollarSign,
+  };
+
+  const Icon = icons[icon];
+
   return (
     <Card>
       <CardContent className="flex items-center justify-between p-6">
         <div className="space-y-1">
           <p className="text-sm text-muted-foreground">{title}</p>
-
           <h2 className="text-3xl font-bold">{value}</h2>
-
           {description && (
-            <p className="text-xs text-muted-foreground">
-              {description}
-            </p>
+            <p className="text-xs text-muted-foreground">{description}</p>
           )}
         </div>
 

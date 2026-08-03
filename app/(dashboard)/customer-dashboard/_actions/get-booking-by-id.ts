@@ -20,7 +20,6 @@ export async function getBookingById(id: string) {
   }
 
   const result = await res.json();
-
   const booking = result.data;
 
   return {

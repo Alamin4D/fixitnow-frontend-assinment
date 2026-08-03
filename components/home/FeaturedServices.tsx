@@ -15,12 +15,10 @@ export default async function FeaturedServices() {
                         <h2 className="text-4xl font-bold">
                             Featured Services
                         </h2>
-
                         <p className="mt-2 text-muted-foreground">
                             Discover our most popular home services.
                         </p>
                     </div>
-
                     <Link
                         href="/services"
                         className="font-semibold text-primary transition hover:underline"

@@ -251,6 +251,7 @@ const TechnicianBookingsTable = ({
               </p>
             </div>
 
+
             <span
               className={`mt-4 inline-block rounded-full px-3 py-1 text-xs font-medium ${statusStyles[booking.status]}`}
             >

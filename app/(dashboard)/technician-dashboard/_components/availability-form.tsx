@@ -11,6 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+
 const days = [
   "Monday",
   "Tuesday",
@@ -36,9 +37,6 @@ const AvailabilityForm = () => {
     };
 
     console.log(payload);
-
-    // TODO:
-    // await createAvailability(payload)
   };
 
   return (

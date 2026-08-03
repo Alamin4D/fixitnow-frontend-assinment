@@ -16,6 +16,7 @@ export default async function DashboardLayout({
   const name = cookieStore.get("name")?.value ?? "";
   const email = cookieStore.get("email")?.value ?? "";
 
+  
   return (
     <DashboardShell
       role={role}

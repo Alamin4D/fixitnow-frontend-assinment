@@ -6,6 +6,7 @@ interface Payment {
   createdAt: string;
 }
 
+
 const PaymentHistoryTable = ({
   payments,
 }: {

@@ -11,6 +11,7 @@ interface UsersClientProps {
   users: User[];
 }
 
+
 export default function UsersClient({
   users,
 }: UsersClientProps) {

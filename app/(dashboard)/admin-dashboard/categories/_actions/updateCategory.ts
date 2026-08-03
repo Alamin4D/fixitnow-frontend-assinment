@@ -27,6 +27,7 @@ export const updateCategory = async (
         body: JSON.stringify(values),
       }
     );
+    
 
     const data = await res.json();
 

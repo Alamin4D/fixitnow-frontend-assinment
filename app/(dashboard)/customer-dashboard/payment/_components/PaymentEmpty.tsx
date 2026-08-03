@@ -10,6 +10,7 @@ interface PaymentEmptyProps {
   actionHref?: string;
 }
 
+
 const PaymentEmpty = ({
   title = "No Payment Found",
   description = "There are no payment records available at the moment.",

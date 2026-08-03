@@ -8,6 +8,7 @@ export default function TechnicianProfile({
 }: {
   technician: any;
 }) {
+
   return (
     <div className="grid gap-8 lg:grid-cols-3">
       <Card className="p-6 text-center">
@@ -47,10 +48,6 @@ export default function TechnicianProfile({
             {technician.rating} ({technician.totalReviews})
           </p>
         </div>
-
-        {/* <Button className="mt-6 w-full">
-          Book Service
-        </Button> */}
       </Card>
 
       <div className="space-y-6 lg:col-span-2">
@@ -58,7 +55,6 @@ export default function TechnicianProfile({
           <h3 className="mb-3 text-xl font-semibold">
             Biography
           </h3>
-
           <p className="text-muted-foreground">
             {technician.bio}
           </p>
@@ -68,7 +64,6 @@ export default function TechnicianProfile({
           <h3 className="mb-3 text-xl font-semibold">
             Availability
           </h3>
-
           <div className="space-y-2">
             {technician.availability?.map((item: any) => (
               <div

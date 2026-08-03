@@ -10,6 +10,7 @@ import {
   User,
 } from "lucide-react";
 
+
 export default function ServiceCard({
   service,
 }: {
@@ -24,11 +25,9 @@ export default function ServiceCard({
       <h2 className="text-xl font-semibold">
         {service.title}
       </h2>
-
       <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
         {service.description}
       </p>
-
       <div className="mt-5 space-y-2 text-sm">
         <div className="flex items-center gap-2">
           <User size={16} />

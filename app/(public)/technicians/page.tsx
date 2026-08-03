@@ -7,6 +7,7 @@ import TechnicianList from "../_components/TechnicianList";
 export default async function TechniciansPage() {
     const technicians = await getTechnicians();
 
+
     return (
         <Container>
             <section className="container mx-auto py-12">
@@ -19,7 +20,6 @@ export default async function TechniciansPage() {
                         Meet our experienced and trusted professionals.
                     </p>
                 </div>
-
                 <TechnicianList technicians={technicians} />
             </section>
         </Container>

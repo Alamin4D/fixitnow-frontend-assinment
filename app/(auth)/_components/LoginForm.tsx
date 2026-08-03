@@ -25,15 +25,10 @@ export default function LoginForm() {
         e: React.FormEvent<HTMLFormElement>
     ) {
         e.preventDefault();
-
-
         const formData = new FormData(e.currentTarget);
-
 
         try {
             setLoading(true);
-
-
             const result = await loginAction(
                 {
                     success: false,
@@ -42,19 +37,13 @@ export default function LoginForm() {
                 formData
             );
 
-
             if (!result.success) {
                 toast.error(result.message);
                 return;
             }
 
-
             toast.success(result.message);
-
-
             router.refresh();
-
-
             if (redirect) {
                 router.replace(redirect);
                 return;
@@ -93,19 +82,14 @@ export default function LoginForm() {
     return (
         <form onSubmit={handleSubmit}>
             <Card className="space-y-5 p-6">
-
-
                 <div className="space-y-2">
                     <Label>Email</Label>
-
                     <Input
                         name="email"
                         type="email"
                         placeholder="john@gmail.com"
                     />
                 </div>
-
-
                 <div className="space-y-2">
                     <Label>Password</Label>
 
@@ -115,8 +99,6 @@ export default function LoginForm() {
                         placeholder="********"
                     />
                 </div>
-
-
                 <Button
                     type="submit"
                     className="w-full"
@@ -126,13 +108,10 @@ export default function LoginForm() {
                         ? "Logging in..."
                         : "Login"}
                 </Button>
-
-
                 <div className="text-center text-sm">
                     <span className="text-muted-foreground">
                         Don&apos;t have an account?{" "}
                     </span>
-
                     <a
                         href="/register"
                         className="font-medium text-primary hover:underline"
@@ -140,8 +119,6 @@ export default function LoginForm() {
                         Sign up
                     </a>
                 </div>
-
-
             </Card>
         </form>
     );

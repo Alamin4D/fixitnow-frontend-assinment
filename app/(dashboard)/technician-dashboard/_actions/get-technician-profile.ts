@@ -8,13 +8,16 @@ export const getTechnicianProfile = async () => {
   const token = (await cookies()).get("accessToken")?.value;
 
   try {
-    const res = await fetch(`${BACKEND_API_URL}/api/technician/profile`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      cache: "no-store",
-    });
+    const res = await fetch(
+      `${BACKEND_API_URL}/api/technician/profile`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        cache: "no-store",
+      }
+    );
 
     const data = await res.json();
 

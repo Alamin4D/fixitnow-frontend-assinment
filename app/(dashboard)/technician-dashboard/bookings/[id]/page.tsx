@@ -8,11 +8,10 @@ interface Props {
     }>;
 }
 
+
 const BookingsPageById = async ({ params }: Props) => {
     const { id } = await params;
-
     const booking = await getBookingById(id);
-
     return <BookingDetails booking={booking} />;
 };
 

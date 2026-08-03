@@ -9,11 +9,11 @@ type Props = {
   }>;
 };
 
+
 export default async function ServiceDetailsPage({
   params,
 }: Props) {
   const { id } = await params;
-
   const service = await getServiceById(id);
 
   return (

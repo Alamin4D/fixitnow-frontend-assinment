@@ -15,9 +15,7 @@ import {
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-
 import { cancelBooking } from "../_actions/cancel-booking";
-
 import {
     AlertDialog,
     AlertDialogAction,

@@ -20,6 +20,7 @@ export type BookingStatus =
   | "COMPLETED"
   | "CANCELLED";
 
+  
 interface BookingFiltersProps {
   search: string;
   status: BookingStatus;

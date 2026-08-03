@@ -21,6 +21,7 @@ export const createCategory = async (payload: {
         body: JSON.stringify(payload),
       }
     );
+    
 
     const result = await res.json();
 

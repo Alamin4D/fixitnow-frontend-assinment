@@ -16,7 +16,6 @@ import {
 } from "lucide-react";
 
 export type UserRole = "CUSTOMER" | "TECHNICIAN" | "ADMIN";
-
 export interface DashboardMenuItem {
   title: string;
   href: string;

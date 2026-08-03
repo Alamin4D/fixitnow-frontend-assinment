@@ -4,7 +4,6 @@ import PaymentHistoryTable from "./_components/PaymentHistoryTable";
 
 const PaymentPage = async () => {
   const result = await getPaymentHistory();
-
   const payments = result?.data || [];
 
   return (

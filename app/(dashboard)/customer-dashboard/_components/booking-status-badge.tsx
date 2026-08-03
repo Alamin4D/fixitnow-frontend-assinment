@@ -15,13 +15,13 @@ interface BookingStatusBadgeProps {
     className?: string;
 }
 
+
 const statusConfig: Record<
     BookingStatus,
     {
         label: string;
         className: string;
-    }
-> = {
+    }> = {
     REQUESTED: {
         label: "Pending",
         className:

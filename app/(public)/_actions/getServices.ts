@@ -6,6 +6,7 @@ interface GetServicesParams {
   location?: string;
 }
 
+
 export const getServices = async ({
   search,
   categoryId,

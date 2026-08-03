@@ -18,6 +18,7 @@ export const getTechnicianBookings = async () => {
         cache: "no-store",
       }
     );
+    
 
     const data = await res.json();
 

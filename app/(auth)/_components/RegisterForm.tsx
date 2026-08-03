@@ -128,6 +128,7 @@ export default function RegisterForm() {
                         )}
                     </div>
 
+
                     <Button
                         type="submit"
                         className="w-full"
@@ -135,6 +136,7 @@ export default function RegisterForm() {
                     >
                         {pending ? "Creating Account..." : "Register"}
                     </Button>
+
 
                     <div className="text-center text-sm">
                         <span className="text-muted-foreground">Already have an account? </span>

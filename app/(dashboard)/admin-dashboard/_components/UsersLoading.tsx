@@ -14,6 +14,7 @@ interface UsersLoadingProps {
   rows?: number;
 }
 
+
 export default function UsersLoading({
   rows = 5,
 }: UsersLoadingProps) {

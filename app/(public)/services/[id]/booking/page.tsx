@@ -8,6 +8,7 @@ type Props = {
 };
 
 
+
 const BookingPage = async ({ params }: Props) => {
   const { id } = await params;
 
@@ -17,12 +18,10 @@ const BookingPage = async ({ params }: Props) => {
         <h1 className="text-3xl font-bold">
           Book Service
         </h1>
-
         <p className="text-muted-foreground mt-2">
           Fill in the booking details below.
         </p>
       </div>
-
       <BookingForm serviceId={id} />
     </div>
   );

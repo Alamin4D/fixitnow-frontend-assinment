@@ -18,6 +18,7 @@ export async function cancelBooking(id: string) {
     }
   );
 
+  
   const result = await res.json();
 
   if (!res.ok) {

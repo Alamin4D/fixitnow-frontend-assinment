@@ -26,6 +26,7 @@ export const updateBookingStatus = async (
 
         const data = await res.json();
 
+
         if (!res.ok) {
             return {
                 success: false,
@@ -33,7 +34,6 @@ export const updateBookingStatus = async (
             };
         }
 
-        // revalidateTag("technician-bookings");
 
         return {
             success: true,

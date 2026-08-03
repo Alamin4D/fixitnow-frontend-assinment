@@ -29,6 +29,7 @@ import LogoutButton from "./logout-button";
 
 type Role = "CUSTOMER" | "TECHNICIAN" | "ADMIN";
 
+
 interface UserDropdownProps {
     name?: string;
     email?: string;

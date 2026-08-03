@@ -12,6 +12,7 @@ export default function UserStatusBadge({
 }: UserStatusBadgeProps) {
   const isActive = status === "ACTIVE";
 
+  
   return (
     <Badge
       className={cn(

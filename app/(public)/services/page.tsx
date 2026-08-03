@@ -14,6 +14,7 @@ interface ServicesPageProps {
   }>;
 }
 
+
 export default async function ServicesPage({
   searchParams,
 }: ServicesPageProps) {

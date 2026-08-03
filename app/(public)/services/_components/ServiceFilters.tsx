@@ -15,6 +15,7 @@ interface Category {
   name: string;
 }
 
+
 interface Props {
   search: string;
   categoryId: string;
@@ -53,7 +54,6 @@ export default function ServiceFilters({
     } else {
       params.set(key, value);
     }
-
     router.push(`/services?${params.toString()}`);
   };
 

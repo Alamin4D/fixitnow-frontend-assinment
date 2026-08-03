@@ -7,6 +7,7 @@ import { getTopTechnicians } from "@/app/(public)/_actions/getTopTechnicians";
 export default async function TopTechnicians() {
     const technicians = await getTopTechnicians();
 
+    
     return (
         <Container>
             <section className="bg-slate-50 py-20">

@@ -17,6 +17,7 @@ export const deleteCategory = async (id: string) => {
         },
       }
     );
+    
 
     const data = await res.json();
 
