@@ -1,102 +1,126 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Search } from "lucide-react";
+import { ArrowRight, Search, ShieldCheck, Star, Users } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 import Container from "../shared/Container";
 
 export default function Hero() {
-    return (
-        <Container>
-            <section className="bg-gradient-to-br from-slate-50 via-blue-50 to-cyan-50">
-                <div className="container mx-auto px-4 py-16 lg:py-24">
-                    <div className="grid items-center gap-12 lg:grid-cols-2">
-                        {/* Left Content */}
-                        <div>
-                            <span className="rounded-full bg-blue-100 px-4 py-2 text-sm font-medium text-blue-600">
-                                Trusted Home Services
-                            </span>
+  return (
+    <section className="relative overflow-hidden bg-muted/30">
+      <Container>
+        <div className="grid min-h-[620px] items-center gap-12 py-16 lg:grid-cols-2 lg:py-20">
+          {/* Left Content */}
+          <div>
+            {/* Badge */}
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border bg-background px-4 py-2 text-sm font-medium shadow-sm">
+              <ShieldCheck className="h-4 w-4 text-primary" />
+              Trusted & Verified Professionals
+            </div>
 
-                            <h1 className="mt-6 text-4xl font-extrabold leading-tight text-slate-900 md:text-5xl lg:text-6xl">
-                                Find Trusted Home
-                                <span className="block text-blue-600">
-                                    Service Professionals
-                                </span>
-                            </h1>
+            {/* Heading */}
+            <h1 className="max-w-2xl text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+              Trusted Home Services,
+              <span className="block text-primary">
+                Right at Your Doorstep
+              </span>
+            </h1>
 
-                            <p className="mt-6 max-w-xl text-lg text-slate-600">
-                                Book verified electricians, plumbers, cleaners, painters and more
-                                within minutes. Fast, secure and reliable home services at your
-                                fingertips.
-                            </p>
+            {/* Description */}
+            <p className="mt-6 max-w-xl text-base leading-7 text-muted-foreground sm:text-lg">
+              Find skilled and verified professionals for your home.
+              Book reliable services, choose a convenient time, and
+              get your work done without the hassle.
+            </p>
 
-                            {/* Search */}
-                            <div className="mt-8 flex flex-col gap-3 rounded-xl bg-white p-3 shadow-lg md:flex-row">
-                                <div className="relative flex-1">
-                                    <Search className="absolute left-3 top-1/2 size-5 -translate-y-1/2 text-slate-400" />
+            {/* Search */}
+            <div className="mt-8 flex max-w-xl flex-col gap-3 rounded-2xl border bg-background p-2 shadow-lg sm:flex-row">
+              <div className="flex flex-1 items-center gap-3 px-3">
+                <Search className="h-5 w-5 shrink-0 text-muted-foreground" />
 
-                                    <input
-                                        type="text"
-                                        placeholder="Search services..."
-                                        className="h-12 w-full rounded-lg border border-slate-200 pl-10 pr-4 outline-none focus:border-blue-500"
-                                    />
-                                </div>
+                <input
+                  type="text"
+                  placeholder="What service do you need?"
+                  className="h-12 w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+                />
+              </div>
 
-                                <button className="h-12 rounded-lg bg-blue-600 px-8 font-semibold text-white transition hover:bg-blue-700">
-                                    Search
-                                </button>
-                            </div>
+              <Button size="lg" asChild className="h-12 px-6">
+                <Link href="/services">
+                  Find a Service
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
 
-                            {/* Buttons */}
-                            <div className="mt-8 flex flex-wrap gap-4">
-                                <Link
-                                    href="/services"
-                                    className="rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
-                                >
-                                    Explore Services
-                                </Link>
-                                
+            {/* Secondary CTA */}
+            <div className="mt-5">
+              <Button variant="outline" size="lg" asChild>
+                <Link href="/technicians">
+                  Become a Technician
+                </Link>
+              </Button>
+            </div>
 
-                                <Link
-                                    href="/auth/register"
-                                    className="rounded-lg border border-slate-300 px-6 py-3 font-semibold transition hover:bg-slate-100"
-                                >
-                                    Become a Technician
-                                </Link>
-                            </div>
-
-                            {/* Stats */}
-                            <div className="mt-12 grid grid-cols-3 gap-6">
-                                <div>
-                                    <h3 className="text-3xl font-bold text-blue-600">500+</h3>
-                                    <p className="text-slate-600">Professionals</p>
-                                </div>
-
-                                <div>
-                                    <h3 className="text-3xl font-bold text-blue-600">5K+</h3>
-                                    <p className="text-slate-600">Bookings</p>
-                                </div>
-
-                                <div>
-                                    <h3 className="text-3xl font-bold text-blue-600">4.9★</h3>
-                                    <p className="text-slate-600">Customer Rating</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Right Image */}
-                        <div className="relative">
-                            <Image
-                                src="https://www.echostar.com/content/echostar/us/en/home/careers/hiring-process/candidate-advice/your-ticket-to-a-field-technician-interview/_jcr_content/root/container/flexcontainer/row1/column0/image.coreimg.png/1758836574619/hero-your-ticket-to-a-field-technician-interview.png"
-                                unoptimized
-                                alt="Home Service Technician"
-                                width={700}
-                                height={700}
-                                priority
-                                className="mx-auto w-full max-w-xl"
-                            />
-                        </div>
-                    </div>
+            {/* Trust Indicators */}
+            <div className="mt-8 flex flex-wrap items-center gap-6 text-sm">
+              <div className="flex items-center gap-2">
+                <Users className="h-5 w-5 text-primary" />
+                <div>
+                  <p className="font-semibold">1,200+</p>
+                  <p className="text-xs text-muted-foreground">
+                    Verified Technicians
+                  </p>
                 </div>
-            </section>
-        </Container>
-    );
+              </div>
+
+              <div className="flex items-center gap-2">
+                <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                <div>
+                  <p className="font-semibold">4.8/5</p>
+                  <p className="text-xs text-muted-foreground">
+                    Customer Rating
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Image */}
+          <div className="relative hidden lg:block">
+            {/* Background decoration */}
+            <div className="absolute -right-10 -top-10 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
+
+            <div className="relative overflow-hidden rounded-3xl border bg-background p-3 shadow-2xl">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
+                <Image
+                  src="https://www.voltasairconditioning.com.au/image/hero.png"
+                  alt="Professional home service technician"
+                  fill
+                  unoptimized
+                  priority
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 0px, 50vw"
+                />
+              </div>
+            </div>
+
+            {/* Floating Rating Card */}
+            <div className="absolute -bottom-6 -left-8 flex items-center gap-3 rounded-2xl border bg-background p-4 shadow-xl">
+              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10">
+                <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+              </div>
+
+              <div>
+                <p className="font-semibold">Top Rated Service</p>
+                <p className="text-xs text-muted-foreground">
+                  Trusted by thousands
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
 }

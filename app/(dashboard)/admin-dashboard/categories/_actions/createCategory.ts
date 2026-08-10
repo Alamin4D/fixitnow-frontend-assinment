@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 export const createCategory = async (payload: {
   name: string;
   description: string;
-  icon: string;
+  image: string;
 }) => {
   try {
     const token = (await cookies()).get("accessToken")?.value;

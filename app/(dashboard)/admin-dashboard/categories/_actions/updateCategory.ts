@@ -10,7 +10,7 @@ export const updateCategory = async (
   values: {
     name: string;
     description: string;
-    icon: string;
+    image: string;
   }
 ) => {
   const token = (await cookies()).get("accessToken")?.value;

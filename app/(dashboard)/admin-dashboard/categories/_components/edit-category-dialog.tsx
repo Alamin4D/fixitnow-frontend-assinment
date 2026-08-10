@@ -24,7 +24,7 @@ interface EditCategoryDialogProps {
     id: string;
     name: string;
     description: string;
-    icon: string;
+    image: string;
   };
 }
 
@@ -81,7 +81,7 @@ const EditCategoryDialog = ({
           defaultValues={{
             name: category.name,
             description: category.description,
-            icon: category.icon,
+            image: category.image,
           }}
           onSubmit={handleSubmit}
           isSubmitting={isSubmitting}

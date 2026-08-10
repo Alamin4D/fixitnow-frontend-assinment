@@ -1,75 +1,95 @@
+import Image from "next/image";
 import Link from "next/link";
-import {
-  Clock3,
-  MapPin,
-  Star,
-  User,
-  Wrench,
-} from "lucide-react";
 
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
+import { Clock3, MapPin, Star, User } from "lucide-react";
+
 interface ServiceCardProps {
-  service: any;
+  service: {
+    id: string;
+    title: string;
+    description: string;
+    price: number;
+    duration: number;
+    category: {
+      name: string;
+      image?: string | null;
+    };
+    technician: {
+      location: string;
+      rating: number;
+      user: {
+        name: string;
+      };
+    };
+  };
 }
 
-
-export default function ServiceCard({
-  service,
-}: ServiceCardProps) {
+export default function ServiceCard({ service }: ServiceCardProps) {
   return (
-    <Card className="group overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-      <CardContent className="p-6">
-        {/* Category */}
-        <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-xl bg-primary/10 text-primary">
-          <Wrench className="h-8 w-8" />
-        </div>
+    <Card className="overflow-hidden transition-shadow hover:shadow-lg">
+      {/* Category Image */}
+      <div className="relative h-48 w-full overflow-hidden bg-muted">
+        {service.category.image ? (
+          <Image
+            src={service.category.image}
+            alt={service.category.name}
+            unoptimized
+            fill
+            className="object-cover transition-transform duration-300 hover:scale-105"
+          />
+        ) : (
+          <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
+            No image available
+          </div>
+        )}
+      </div>
 
-        {/* Title */}
-        <h2 className="line-clamp-1 text-xl font-semibold">
-          {service.title}
-        </h2>
+      <div className="p-5">
+        {/* Category */}
+        <p className="mb-2 text-sm font-medium text-primary">
+          {service.category.name}
+        </p>
+
+        {/* Service Title */}
+        <h2 className="text-xl font-semibold">{service.title}</h2>
 
         {/* Description */}
         <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
           {service.description}
         </p>
 
-        {/* Technician Info */}
-        <div className="mt-5 space-y-3 text-sm text-muted-foreground">
+        {/* Service Information */}
+        <div className="mt-5 space-y-2 text-sm">
           <div className="flex items-center gap-2">
-            <User className="h-4 w-4 text-primary" />
-            <span>{service.technician?.user?.name}</span>
+            <User size={16} />
+            <span>{service.technician.user.name}</span>
           </div>
 
           <div className="flex items-center gap-2">
-            <MapPin className="h-4 w-4 text-primary" />
-            <span>{service.technician?.location}</span>
+            <MapPin size={16} />
+            <span>{service.technician.location}</span>
           </div>
 
           <div className="flex items-center gap-2">
-            <Clock3 className="h-4 w-4 text-primary" />
+            <Clock3 size={16} />
             <span>{service.duration} mins</span>
           </div>
 
           <div className="flex items-center gap-2">
-            <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-            <span>{service.technician?.rating ?? "N/A"}</span>
+            <Star
+              size={16}
+              className="fill-yellow-400 text-yellow-400"
+            />
+            <span>{service.technician.rating}</span>
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="mt-6 flex items-center justify-between border-t pt-5">
-          <div>
-            <p className="text-xs text-muted-foreground">
-              Starting From
-            </p>
-
-            <p className="text-2xl font-bold text-primary">
-              ${service.price}
-            </p>
-          </div>
+        {/* Price & Button */}
+        <div className="mt-6 flex items-center justify-between gap-4">
+          <span className="text-2xl font-bold">${service.price}</span>
 
           <Button asChild>
             <Link href={`/services/${service.id}`}>
@@ -77,7 +97,7 @@ export default function ServiceCard({
             </Link>
           </Button>
         </div>
-      </CardContent>
+      </div>
     </Card>
   );
 }

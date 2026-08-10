@@ -18,12 +18,12 @@ const categorySchema = z.object({
     .string()
     .min(5, "Description must be at least 5 characters"),
 
-  icon: z.string().min(1, "Icon is required"),
+  image: z
+    .string()
+    .min(1, "Image is required"),
 });
 
-export type CategoryFormValues = z.infer<
-  typeof categorySchema
->;
+export type CategoryFormValues = z.infer<typeof categorySchema>;
 
 interface CategoryFormProps {
   defaultValues?: CategoryFormValues;
@@ -35,7 +35,7 @@ interface CategoryFormProps {
 
 const CategoryForm = ({
   defaultValues,
-  isSubmitting,
+  isSubmitting = false,
   onSubmit,
 }: CategoryFormProps) => {
   const {
@@ -48,7 +48,7 @@ const CategoryForm = ({
     defaultValues: {
       name: "",
       description: "",
-      icon: "",
+      image: "",
     },
   });
 
@@ -61,15 +61,19 @@ const CategoryForm = ({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-6"
+      className="space-y-5"
     >
       {/* Name */}
       <div className="space-y-2">
-        <label className="text-sm font-medium">
+        <label
+          htmlFor="name"
+          className="text-sm font-medium"
+        >
           Category Name
         </label>
 
         <Input
+          id="name"
           placeholder="Electrical"
           {...register("name")}
         />
@@ -83,12 +87,16 @@ const CategoryForm = ({
 
       {/* Description */}
       <div className="space-y-2">
-        <label className="text-sm font-medium">
+        <label
+          htmlFor="description"
+          className="text-sm font-medium"
+        >
           Description
         </label>
 
         <Textarea
-          placeholder="Electrical repair, wiring"
+          id="description"
+          placeholder="Electrical repair, wiring, installation..."
           {...register("description")}
         />
 
@@ -99,20 +107,24 @@ const CategoryForm = ({
         )}
       </div>
 
-      {/* Icon */}
+      {/* Image */}
       <div className="space-y-2">
-        <label className="text-sm font-medium">
-          Icon
+        <label
+          htmlFor="image"
+          className="text-sm font-medium"
+        >
+          Image
         </label>
 
         <Input
-          placeholder="⚡"
-          {...register("icon")}
+          id="image"
+          placeholder="https://example.com/electrical.png"
+          {...register("image")}
         />
 
-        {errors.icon && (
+        {errors.image && (
           <p className="text-sm text-destructive">
-            {errors.icon.message}
+            {errors.image.message}
           </p>
         )}
       </div>

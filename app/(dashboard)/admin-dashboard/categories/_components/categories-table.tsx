@@ -18,7 +18,7 @@ type Category = {
   id: string;
   name: string;
   description: string;
-  icon: string;
+  image: string;
   isActive: boolean;
   createdAt: string;
   updatedAt: string;
@@ -46,7 +46,7 @@ export default function CategoriesTable({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Icon</TableHead>
+            <TableHead>Image</TableHead>
             <TableHead>Name</TableHead>
             <TableHead>Description</TableHead>
             <TableHead>Services</TableHead>
@@ -59,7 +59,7 @@ export default function CategoriesTable({
           {categories.length ? (
             categories.map((category) => (
               <TableRow key={category.id}>
-                <TableCell>{category.icon}</TableCell>
+                <TableCell>{category.image}</TableCell>
 
                 <TableCell className="font-medium">
                   {category.name}

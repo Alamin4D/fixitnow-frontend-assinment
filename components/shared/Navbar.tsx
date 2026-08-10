@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Menu } from "lucide-react";
 
 import Logo from "./Logo";
-import Container from "./Container";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -14,6 +13,7 @@ import {
 
 import { getCurrentUser } from "@/lib/getCurrentUser";
 import { logoutAction } from "@/app/(auth)/_actions/logoutAction";
+import { ThemeToggle } from "../theme-toggle";
 
 
 const navLinks = [
@@ -21,15 +21,14 @@ const navLinks = [
   { label: "Services", href: "/services" },
   { label: "Technicians", href: "/technicians" },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: "Contact", href: "/contract" },
 ];
 
 export default async function Navbar() {
   const user = await getCurrentUser();
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur">
-      <Container>
+    <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur px-4 sm:px-6 lg:px-8">
         <nav className="flex h-16 items-center justify-between">
           <Logo />
 
@@ -48,6 +47,7 @@ export default async function Navbar() {
 
           {/* Desktop Auth */}
           <div className="hidden items-center gap-3 md:flex">
+            <ThemeToggle />
             {user ? (
               <>
                 <Button asChild>
@@ -129,11 +129,11 @@ export default async function Navbar() {
                     </Button>
                   </>
                 )}
+                <ThemeToggle />
               </div>
             </SheetContent>
           </Sheet>
         </nav>
-      </Container>
     </header>
   );
 }

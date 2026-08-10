@@ -5,8 +5,7 @@ import Logo from "./Logo";
 export default function Footer() {
   
   return (
-    <footer className="border-t bg-muted/40">
-      <Container className="py-10">
+    <footer className="border-t bg-muted/40 px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid gap-8 md:grid-cols-4">
           <div>
             <Logo />
@@ -47,7 +46,6 @@ export default function Footer() {
         <div className="mt-10 border-t pt-6 text-center text-sm text-muted-foreground">
           © {new Date().getFullYear()} FixMate. All rights reserved.
         </div>
-      </Container>
     </footer>
   );
 }
