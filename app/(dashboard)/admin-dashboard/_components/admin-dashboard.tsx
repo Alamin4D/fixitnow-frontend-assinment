@@ -40,7 +40,7 @@ import {
 
 
 const API_URL =
-    process.env.NEXT_PUBLIC_BACKEND_API_URL ||
+    process.env.BACKEND_API_URL ||
     "http://localhost:5000";
 
 
@@ -978,9 +978,6 @@ const AdminDashboard = () => {
                                     }}
                                 >
 
-                                    {/* =========================================
-                Gradient
-            ========================================= */}
 
                                     <defs>
 
@@ -1035,21 +1032,6 @@ const AdminDashboard = () => {
                                     </defs>
 
 
-                                    {/* =========================================
-                Grid
-            ========================================= */}
-
-                                    <CartesianGrid
-                                        strokeDasharray="4 4"
-                                        vertical={false}
-                                        className="stroke-muted/50"
-                                    />
-
-
-                                    {/* =========================================
-                X Axis
-            ========================================= */}
-
                                     <XAxis
                                         dataKey="month"
                                         axisLine={false}
@@ -1060,10 +1042,6 @@ const AdminDashboard = () => {
                                         tickMargin={10}
                                     />
 
-
-                                    {/* =========================================
-                Y Axis
-            ========================================= */}
 
                                     <YAxis
                                         axisLine={false}
@@ -1077,10 +1055,6 @@ const AdminDashboard = () => {
                                         }
                                     />
 
-
-                                    {/* =========================================
-                Tooltip
-            ========================================= */}
 
                                     <Tooltip
                                         cursor={{
@@ -1108,10 +1082,6 @@ const AdminDashboard = () => {
                                     />
 
 
-                                    {/* =========================================
-                Area
-            ========================================= */}
-
                                     <Area
                                         type="monotone"
                                         dataKey="revenue"
@@ -1119,10 +1089,6 @@ const AdminDashboard = () => {
                                         fill="url(#revenueAreaGradient)"
                                     />
 
-
-                                    {/* =========================================
-                Revenue Line
-            ========================================= */}
 
                                     <Line
                                         type="monotone"
