@@ -6,6 +6,8 @@ const PUBLIC_ROUTES = [
   "/technicians",
   "/login",
   "/register",
+  "/about",
+  "/contract"
 ];
 
 export function proxy(request: NextRequest) {

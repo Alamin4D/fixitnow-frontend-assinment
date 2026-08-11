@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+
 import {
   Eye,
   EyeOff,
@@ -18,6 +19,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 import { loginAction } from "../_actions/loginActions";
+import { googleLoginAction } from "../_actions/googleLoginAction";
+
 import { toast } from "sonner";
 
 export default function LoginForm() {
@@ -30,10 +33,85 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  /*
+   * Google Identity Services
+   */
+  useEffect(() => {
+    const script = document.createElement("script");
+
+    script.src =
+      "https://accounts.google.com/gsi/client";
+
+    script.async = true;
+    script.defer = true;
+
+    script.onload = () => {
+      if (!window.google) {
+        console.error(
+          "Google Identity Services failed to load"
+        );
+        return;
+      }
+
+      const clientId =
+        process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
+
+      if (!clientId) {
+        console.error(
+          "NEXT_PUBLIC_GOOGLE_CLIENT_ID is missing"
+        );
+        return;
+      }
+
+      window.google.accounts.id.initialize({
+        client_id: clientId,
+
+        callback: async (response) => {
+          await handleGoogleLogin(
+            response.credential
+          );
+        },
+      });
+
+      const googleButton =
+        document.getElementById(
+          "google-login-button"
+        );
+
+      if (!googleButton) return;
+
+      window.google.accounts.id.renderButton(
+        googleButton,
+        {
+          theme: "outline",
+          size: "large",
+          width: 400,
+          text: "continue_with",
+          shape: "rect",
+        }
+      );
+    };
+
+    document.body.appendChild(script);
+
+    return () => {
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+    };
+  }, []);
+
+  /*
+   * Normal email/password login
+   */
+  async function handleSubmit(
+    e: React.FormEvent<HTMLFormElement>
+  ) {
     e.preventDefault();
 
-    const formData = new FormData(e.currentTarget);
+    const formData = new FormData(
+      e.currentTarget
+    );
 
     try {
       setLoading(true);
@@ -60,27 +138,77 @@ export default function LoginForm() {
         return;
       }
 
-      switch (result.role) {
-        case "ADMIN":
-          router.replace("/admin-dashboard");
-          break;
-
-        case "TECHNICIAN":
-          router.replace("/technician-dashboard");
-          break;
-
-        case "CUSTOMER":
-          router.replace("/customer-dashboard");
-          break;
-
-        default:
-          router.replace("/");
-      }
+      redirectByRole(result.role);
     } catch (error) {
       console.error(error);
-      toast.error("Something went wrong. Please try again.");
+
+      toast.error(
+        "Something went wrong. Please try again."
+      );
     } finally {
       setLoading(false);
+    }
+  }
+
+  /*
+   * Google login
+   */
+  async function handleGoogleLogin(
+    credential: string
+  ) {
+    try {
+      setLoading(true);
+
+      const result =
+        await googleLoginAction(credential);
+
+      if (!result.success) {
+        toast.error(result.message);
+        return;
+      }
+
+      toast.success(result.message);
+
+      router.refresh();
+
+      if (redirect) {
+        router.replace(redirect);
+        return;
+      }
+
+      redirectByRole(result.role);
+    } catch (error) {
+      console.error(error);
+
+      toast.error(
+        "Google login failed. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  /*
+   * Role based dashboard redirect
+   */
+  function redirectByRole(
+    role?: "ADMIN" | "TECHNICIAN" | "CUSTOMER"
+  ) {
+    switch (role) {
+      case "ADMIN":
+        router.replace("/admin-dashboard");
+        break;
+
+      case "TECHNICIAN":
+        router.replace("/technician-dashboard");
+        break;
+
+      case "CUSTOMER":
+        router.replace("/customer-dashboard");
+        break;
+
+      default:
+        router.replace("/");
     }
   }
 
@@ -93,6 +221,7 @@ export default function LoginForm() {
         {/* Top gradient section */}
         <div className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-blue-500/5 px-6 pb-6 pt-8 sm:px-8">
           <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/10 blur-3xl" />
+
           <div className="absolute -bottom-10 -left-10 h-28 w-28 rounded-full bg-blue-500/10 blur-3xl" />
 
           <div className="relative">
@@ -106,13 +235,17 @@ export default function LoginForm() {
             </h1>
 
             <p className="mt-2 text-sm leading-6 text-muted-foreground">
-              Sign in to your FixItNow account and continue where you left off.
+              Sign in to your FixItNow account and
+              continue where you left off.
             </p>
           </div>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-5 p-6 sm:p-8">
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-5 p-6 sm:p-8"
+        >
           {/* Email */}
           <div className="space-y-2">
             <Label
@@ -161,7 +294,11 @@ export default function LoginForm() {
               <Input
                 id="password"
                 name="password"
-                type={showPassword ? "text" : "password"}
+                type={
+                  showPassword
+                    ? "text"
+                    : "password"
+                }
                 placeholder="Enter your password"
                 autoComplete="current-password"
                 required
@@ -170,7 +307,9 @@ export default function LoginForm() {
 
               <button
                 type="button"
-                onClick={() => setShowPassword((prev) => !prev)}
+                onClick={() =>
+                  setShowPassword((prev) => !prev)
+                }
                 aria-label={
                   showPassword
                     ? "Hide password"
@@ -188,12 +327,14 @@ export default function LoginForm() {
           </div>
 
           {/* Remember me */}
-          <label className="flex cursor-pointer items-center gap-2.5 select-none">
+          <label className="flex cursor-pointer select-none items-center gap-2.5">
             <input
               type="checkbox"
               name="rememberMe"
               checked={rememberMe}
-              onChange={(e) => setRememberMe(e.target.checked)}
+              onChange={(e) =>
+                setRememberMe(e.target.checked)
+              }
               className="peer sr-only"
             />
 
@@ -240,37 +381,13 @@ export default function LoginForm() {
             </div>
           </div>
 
-          {/* Google */}
-          <Button
-            type="button"
-            variant="outline"
-            className="h-12 w-full rounded-xl border-border/70 bg-background font-medium transition-all hover:bg-muted/50"
-          >
-            <svg
-              className="mr-2 h-5 w-5"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                fill="#4285F4"
-                d="M21.35 12.23c0-.79-.07-1.55-.22-2.27H12v4.3h5.22a4.46 4.46 0 0 1-1.94 2.93v2.45h3.14c1.84-1.69 2.93-4.18 2.93-7.41Z"
-              />
-              <path
-                fill="#34A853"
-                d="M12 21.5c2.63 0 4.84-.87 6.45-2.36l-3.14-2.45c-.87.58-1.98.92-3.31.92-2.55 0-4.71-1.72-5.49-4.03H3.27v2.53A9.74 9.74 0 0 0 12 21.5Z"
-              />
-              <path
-                fill="#FBBC05"
-                d="M6.51 13.58A5.86 5.86 0 0 1 6.2 12c0-.55.11-1.08.31-1.58V7.89H3.27A9.74 9.74 0 0 0 2.25 12c0 1.57.38 3.05 1.02 4.11l3.24-2.53Z"
-              />
-              <path
-                fill="#EA4335"
-                d="M12 6.39c1.43 0 2.71.49 3.72 1.45l2.79-2.79C16.84 3.49 14.63 2.5 12 2.5a9.74 9.74 0 0 0-8.73 5.39l3.24 2.53C7.29 8.11 9.45 6.39 12 6.39Z"
-              />
-            </svg>
-
-            Continue with Google
-          </Button>
+          {/* Google Login */}
+          <div className="flex min-h-12 w-full items-center justify-center overflow-hidden rounded-xl">
+            <div
+              id="google-login-button"
+              className="flex w-full justify-center"
+            />
+          </div>
 
           {/* Register */}
           <p className="pt-1 text-center text-sm text-muted-foreground">
