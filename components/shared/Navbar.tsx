@@ -24,6 +24,7 @@ const navLinks = [
   { label: "Contract", href: "/contract" },
 ];
 
+
 export default async function Navbar() {
   const user = await getCurrentUser();
 
