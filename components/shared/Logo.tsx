@@ -8,7 +8,7 @@ export default function Logo() {
       <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground">
         <Wrench size={20} />
       </div>
-      <span className="text-xl font-bold">FixMate</span>
+      <span className="text-xl font-bold">FixItNow</span>
     </Link>
   );
 }

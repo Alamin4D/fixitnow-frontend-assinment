@@ -75,39 +75,6 @@ export default function DashboardNavbar({
                             role={role}
                         />
                     </DropdownMenuTrigger>
-
-                    <DropdownMenuContent
-                        align="end"
-                        className="w-60"
-                    >
-                        <div className="px-2 py-1.5">
-                            <p className="font-medium">{name}</p>
-
-                            <p className="text-xs text-muted-foreground">
-                                {email}
-                            </p>
-                        </div>
-
-                        <DropdownMenuSeparator />
-
-                        <DropdownMenuItem asChild>
-                            <Link href="/dashboard/profile">
-                                Profile
-                            </Link>
-                        </DropdownMenuItem>
-
-                        <DropdownMenuItem asChild>
-                            <Link href="/dashboard/settings">
-                                Settings
-                            </Link>
-                        </DropdownMenuItem>
-
-                        <DropdownMenuSeparator />
-
-                        <DropdownMenuItem className="text-red-600 focus:text-red-600">
-                            <LogoutButton />
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
                 </DropdownMenu>
             </div>
         </header>

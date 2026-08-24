@@ -9,9 +9,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Pencil } from "lucide-react";
-import DeleteCategoryDialog from "./delete-category-dialog";
 import CategoryActions from "./category-actions";
 
 type Category = {
@@ -38,15 +35,13 @@ interface CategoriesTableProps {
 
 export default function CategoriesTable({
   categories,
-  onEdit,
-  onDelete,
 }: CategoriesTableProps) {
   return (
     <div className="rounded-lg border">
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Image</TableHead>
+            <TableHead className="w-[100px]">Image</TableHead>
             <TableHead>Name</TableHead>
             <TableHead>Description</TableHead>
             <TableHead>Services</TableHead>
@@ -59,7 +54,22 @@ export default function CategoriesTable({
           {categories.length ? (
             categories.map((category) => (
               <TableRow key={category.id}>
-                <TableCell>{category.image}</TableCell>
+                {/* Image */}
+                <TableCell>
+                  <div className="h-14 w-14 overflow-hidden rounded-lg border bg-muted">
+                    {category.image ? (
+                      <img
+                        src={category.image}
+                        alt={category.name}
+                        className="h-full w-full object-cover"
+                      />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center text-xs text-muted-foreground">
+                        No Image
+                      </div>
+                    )}
+                  </div>
+                </TableCell>
 
                 <TableCell className="font-medium">
                   {category.name}
