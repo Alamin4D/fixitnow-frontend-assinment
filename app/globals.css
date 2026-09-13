@@ -127,3 +127,33 @@
     @apply font-sans;
     }
 }
+
+@keyframes testimonial-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.testimonial-marquee {
+  animation: testimonial-marquee 30s linear infinite;
+}
+
+.testimonial-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (max-width: 768px) {
+  .testimonial-marquee {
+    animation-duration: 32s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-marquee {
+    animation-play-state: paused;
+  }
+}
