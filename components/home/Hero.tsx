@@ -1,313 +1,222 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  ArrowRight,
-  Search,
-  ShieldCheck,
-  Star,
-  Users,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
+import { ArrowRight, Search, ShieldCheck, Star, Users, MapPin } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import Container from "../shared/Container";
 
-const heroSlides = [
+// Real trade photography — not staged stock. Each scene is tied to a
+// service category the platform actually offers, and to one of the
+// three cities FixItNow covers.
+const scenes = [
   {
-    image: "https://media.istockphoto.com/id/2122076165/photo/air-conditioner-service-outdoor-checking-fix-repair-air-conditioner-cleaning-technician-he.jpg?s=612x612&w=0&k=20&c=SM-tKNDbCJZoTzbG-Ik-7Zc4H0sf3phR66cw__86tuU=",
-    alt: "Professional home service technician",
+    image:
+      "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=1920&auto=format&fit=crop",
+    alt: "Electrician installing home wiring",
+    category: "Electrical & AC Repair",
+    city: "Dhaka",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=1200&auto=format&fit=crop",
-    alt: "Professional technician working at home",
+      "https://images.unsplash.com/photo-1676210134188-4c05dd172f89?q=80&w=1920&auto=format&fit=crop",
+    alt: "Plumber repairing a pipe behind a wall",
+    category: "Plumbing",
+    city: "Chattogram",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=1200&auto=format&fit=crop",
-    alt: "Verified home service professional",
+      "https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=1920&auto=format&fit=crop",
+    alt: "Professional cleaning a modern home",
+    category: "Home Cleaning",
+    city: "Khulna",
   },
 ];
 
+const SLIDE_DURATION = 6000;
+
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
+  },
+};
+
 export default function Hero() {
-  const [activeSlide, setActiveSlide] = useState(0);
+  const [active, setActive] = useState(0);
   const [search, setSearch] = useState("");
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 5000);
-
+      setActive((prev) => (prev + 1) % scenes.length);
+    }, SLIDE_DURATION);
     return () => clearInterval(interval);
   }, []);
 
   const handleSearch = () => {
     const query = search.trim();
-
-    if (!query) {
-      window.location.href = "/services";
-      return;
-    }
-
-    window.location.href = `/services?search=${encodeURIComponent(query)}`;
+    window.location.href = query
+      ? `/services?search=${encodeURIComponent(query)}`
+      : "/services";
   };
 
-  const nextSlide = () => {
-    setActiveSlide((prev) => (prev + 1) % heroSlides.length);
-  };
-
-  const previousSlide = () => {
-    setActiveSlide(
-      (prev) => (prev - 1 + heroSlides.length) % heroSlides.length,
-    );
-  };
+  const scene = scenes[active];
 
   return (
-    <section className="relative overflow-hidden bg-muted/30">
-      {/* Background decoration */}
-      <div className="pointer-events-none absolute -left-32 top-20 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
-      <div className="pointer-events-none absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
-
-      <Container>
-        <div className="grid min-h-[620px] items-center gap-12 py-16 lg:grid-cols-2 lg:py-20">
-          {/* Left Content */}
+    <section className="relative isolate min-h-[90vh] overflow-hidden bg-black">
+      {/* ================= FULL-BLEED PHOTOGRAPHY ================= */}
+      <AnimatePresence mode="sync">
+        <motion.div
+          key={scene.image}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+          className="absolute inset-0"
+        >
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
+            initial={{ scale: 1 }}
+            animate={{ scale: 1.07 }}
+            transition={{ duration: SLIDE_DURATION / 1000 + 1, ease: "linear" }}
+            className="absolute inset-0"
           >
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.5 }}
-              className="mb-5 inline-flex items-center gap-2 rounded-full border bg-background px-4 py-2 text-sm font-medium shadow-sm"
-            >
-              <ShieldCheck className="h-4 w-4 text-primary" />
-              Trusted & Verified Professionals
-            </motion.div>
-
-            {/* Heading */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="max-w-2xl text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl"
-            >
-              Trusted Home Services,
-              <span className="block text-primary">
-                Right at Your Doorstep
-              </span>
-            </motion.h1>
-
-            {/* Description */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="mt-6 max-w-xl text-base leading-7 text-muted-foreground sm:text-lg"
-            >
-              Find skilled and verified professionals for your home. Book
-              reliable services, choose a convenient time, and get your work
-              done without the hassle.
-            </motion.p>
-
-            {/* Interactive Search */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="mt-8 flex max-w-xl flex-col gap-3 rounded-2xl border bg-background p-2 shadow-lg transition-shadow duration-300 focus-within:shadow-xl sm:flex-row"
-            >
-              <div className="flex flex-1 items-center gap-3 px-3">
-                <Search className="h-5 w-5 shrink-0 text-muted-foreground" />
-
-                <input
-                  type="text"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      handleSearch();
-                    }
-                  }}
-                  placeholder="What service do you need?"
-                  className="h-12 w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
-                />
-              </div>
-
-              <Button
-                size="lg"
-                onClick={handleSearch}
-                className="h-12 px-6"
-              >
-                Find a Service
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </motion.div>
-
-            {/* Secondary CTA */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="mt-5"
-            >
-              <Button variant="outline" size="lg" asChild>
-                <Link href="/technicians">Become a Technician</Link>
-              </Button>
-            </motion.div>
-
-            {/* Trust Indicators */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-              className="mt-8 flex flex-wrap items-center gap-6 text-sm"
-            >
-              <div className="flex items-center gap-2">
-                <Users className="h-5 w-5 text-primary" />
-
-                <div>
-                  <p className="font-semibold">1,200+</p>
-                  <p className="text-xs text-muted-foreground">
-                    Verified Technicians
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-
-                <div>
-                  <p className="font-semibold">4.8/5</p>
-                  <p className="text-xs text-muted-foreground">
-                    Customer Rating
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* Right Interactive Slider */}
-          <motion.div
-            initial={{ opacity: 0, x: 40, scale: 0.95 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative hidden lg:block"
-          >
-            {/* Decorative Glow */}
-            <motion.div
-              animate={{
-                scale: [1, 1.08, 1],
-                opacity: [0.4, 0.7, 0.4],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="absolute -right-10 -top-10 h-72 w-72 rounded-full bg-primary/10 blur-3xl"
+            <Image
+              src={scene.image}
+              alt={scene.alt}
+              fill
+              unoptimized
+              priority={active === 0}
+              className="object-cover"
+              sizes="100vw"
             />
-
-            {/* Slider Card */}
-            <motion.div
-              whileHover={{
-                y: -8,
-                rotate: 0.5,
-              }}
-              transition={{ duration: 0.3 }}
-              className="relative overflow-hidden rounded-3xl border bg-background p-3 shadow-2xl"
-            >
-              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeSlide}
-                    initial={{ opacity: 0, scale: 1.05 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="absolute inset-0"
-                  >
-                    <Image
-                      src={heroSlides[activeSlide].image}
-                      alt={heroSlides[activeSlide].alt}
-                      fill
-                      unoptimized
-                      priority={activeSlide === 0}
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 0px, 50vw"
-                    />
-                  </motion.div>
-                </AnimatePresence>
-
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-
-                {/* Slider Controls */}
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                  <div className="flex gap-1.5">
-                    {heroSlides.map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => setActiveSlide(index)}
-                        aria-label={`Go to slide ${index + 1}`}
-                        className={`h-2 rounded-full transition-all ${
-                          activeSlide === index
-                            ? "w-7 bg-white"
-                            : "w-2 bg-white/50"
-                        }`}
-                      />
-                    ))}
-                  </div>
-
-                  <div className="flex gap-2">
-                    <button
-                      onClick={previousSlide}
-                      aria-label="Previous slide"
-                      className="flex h-9 w-9 items-center justify-center rounded-full bg-background/90 shadow-md backdrop-blur transition hover:bg-background"
-                    >
-                      <ChevronLeft className="h-4 w-4" />
-                    </button>
-
-                    <button
-                      onClick={nextSlide}
-                      aria-label="Next slide"
-                      className="flex h-9 w-9 items-center justify-center rounded-full bg-background/90 shadow-md backdrop-blur transition hover:bg-background"
-                    >
-                      <ChevronRight className="h-4 w-4" />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Floating Rating Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.5 }}
-              whileHover={{ scale: 1.04, y: -3 }}
-              className="absolute -bottom-6 -left-8 flex items-center gap-3 rounded-2xl border bg-background p-4 shadow-xl"
-            >
-              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10">
-                <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-              </div>
-
-              <div>
-                <p className="font-semibold">Top Rated Service</p>
-                <p className="text-xs text-muted-foreground">
-                  Trusted by thousands
-                </p>
-              </div>
-            </motion.div>
           </motion.div>
-        </div>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Legibility gradients only — no decorative blur circles competing for attention */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/10" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/20 to-transparent" />
+
+      {/* Live category label — ties the copy to whichever photo is showing */}
+      <div className="absolute left-0 right-0 top-8">
+        <Container>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={scene.category}
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.35 }}
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-xs font-medium text-white/85 backdrop-blur-md"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              Now booking {scene.category} in {scene.city}
+            </motion.div>
+          </AnimatePresence>
+        </Container>
+      </div>
+
+      {/* ================= CONTENT ================= */}
+      <Container>
+        <motion.div
+          initial="hidden"
+          animate="show"
+          transition={{ staggerChildren: 0.08 }}
+          className="relative flex min-h-[90vh] flex-col justify-end pb-14 pt-32"
+        >
+          <motion.h1
+            variants={fadeUp}
+            className="max-w-2xl text-5xl font-bold leading-[1.03] tracking-tight text-white sm:text-6xl lg:text-[4.2rem]"
+          >
+            Someone reliable,
+            <span className="block text-primary">right at your door.</span>
+          </motion.h1>
+
+          <motion.p variants={fadeUp} className="mt-5 max-w-lg text-lg text-white/75">
+            Verified technicians for plumbing, electrical, AC, painting, and
+            cleaning — booked in minutes, tracked until they arrive.
+          </motion.p>
+
+          {/* Search */}
+          <motion.div
+            variants={fadeUp}
+            className="mt-8 flex max-w-xl flex-col gap-2 rounded-2xl border border-white/15 bg-white/10 p-2 shadow-2xl backdrop-blur-md transition-shadow duration-300 focus-within:ring-2 focus-within:ring-primary/40 sm:flex-row"
+          >
+            <div className="flex flex-1 items-center gap-3 px-3">
+              <Search className="h-5 w-5 shrink-0 text-white/60" />
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                placeholder="What service do you need?"
+                className="h-12 w-full bg-transparent text-sm text-white outline-none placeholder:text-white/50"
+              />
+            </div>
+            <Button size="lg" onClick={handleSearch} className="group h-12 px-6">
+              Find a service
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </Button>
+          </motion.div>
+
+          {/* Single, compact trust line — replaces scattered badges */}
+          <motion.div
+            variants={fadeUp}
+            className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/70"
+          >
+            <span className="flex items-center gap-1.5">
+              <ShieldCheck className="h-4 w-4 text-primary" />
+              Background-checked
+            </span>
+            <span className="h-3.5 w-px bg-white/20" />
+            <span className="flex items-center gap-1.5">
+              <Users className="h-4 w-4 text-primary" />
+              <strong className="font-semibold text-white">1,200+</strong> technicians
+            </span>
+            <span className="h-3.5 w-px bg-white/20" />
+            <span className="flex items-center gap-1.5">
+              <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
+              <strong className="font-semibold text-white">4.8/5</strong> rating
+            </span>
+            <span className="h-3.5 w-px bg-white/20" />
+            <span className="flex items-center gap-1.5">
+              <MapPin className="h-4 w-4 text-primary" />
+              Dhaka · Khulna · Chattogram
+            </span>
+          </motion.div>
+
+          <motion.div variants={fadeUp} className="mt-4">
+            <Button
+              variant="link"
+              asChild
+              className="h-auto px-0 text-sm font-medium text-white/80 hover:text-primary"
+            >
+              <Link href="/technicians">
+                Become a technician
+                <ArrowRight className="ml-1 h-3.5 w-3.5" />
+              </Link>
+            </Button>
+          </motion.div>
+
+          {/* Scene indicators */}
+          <div className="mt-10 flex gap-2">
+            {scenes.map((s, i) => (
+              <button
+                key={s.category}
+                onClick={() => setActive(i)}
+                aria-label={`Show ${s.category}`}
+                className={`h-1 rounded-full transition-all duration-300 ${
+                  active === i ? "w-8 bg-white" : "w-4 bg-white/30 hover:bg-white/50"
+                }`}
+              />
+            ))}
+          </div>
+        </motion.div>
       </Container>
     </section>
   );

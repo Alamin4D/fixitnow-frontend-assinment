@@ -46,7 +46,7 @@ const faqs = [
 
 export default function FAQ() {
   return (
-    <section className="relative overflow-hidden bg-muted/20 py-20 sm:py-24 lg:py-28">
+    <section className="relative overflow-hidden py-20 sm:py-24 lg:py-28">
       {/* Background Glow */}
       <div className="pointer-events-none absolute -left-32 top-20 h-72 w-72 rounded-full bg-primary/5 blur-3xl" />
 
