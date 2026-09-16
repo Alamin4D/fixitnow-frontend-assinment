@@ -84,25 +84,13 @@ const Testimonials = () => {
 
   return (
     <section
-      className="
-        relative overflow-hidden
-        py-20
-        transition-colors duration-300
-        dark:bg-dark
-        sm:py-24
-      "
-    >
+      className="relative overflow-hidden py-20 transition-colors duration-300 dark:bg-dark sm:py-24">
       {/* Background Decorations */}
       <div
-        className="
-          pointer-events-none absolute
-          -left-40 top-10
-          h-80 w-80
-          rounded-full
+        className="pointer-events-none absolute -left-40 top-10 h-80 wrounded-full
           bg-primary/5
           blur-3xl
-          dark:bg-primary/10
-        "
+          dark:bg-primary/10"
       />
 
       <div
@@ -138,18 +126,7 @@ const Testimonials = () => {
           </div>
 
           {/* Heading */}
-          <h2
-            className="
-              text-3xl font-bold tracking-tight
-              text-slate-900
-              transition-colors duration-300
-              dark:text-white
-              sm:text-4xl lg:text-5xl
-            "
-          >
-            What Our Customers{" "}
-            <span className="text-primary">Say</span>
-          </h2>
+
 
           {/* Description */}
           <p
@@ -202,7 +179,7 @@ const Testimonials = () => {
               >
                 {/* Premium Card */}
                 <article
-  className="
+                  className="
     group/card
     relative
     flex
@@ -227,10 +204,10 @@ const Testimonials = () => {
 
     sm:p-7
   "
->
-  {/* Quote Icon */}
-  <div
-    className="
+                >
+                  {/* Quote Icon */}
+                  <div
+                    className="
       pointer-events-none
       absolute
       right-5
@@ -242,34 +219,34 @@ const Testimonials = () => {
 
       dark:text-primary/[0.12]
     "
-  >
-    <Quote
-      size={72}
-      fill="currentColor"
-      strokeWidth={1.5}
-    />
-  </div>
+                  >
+                    <Quote
+                      size={72}
+                      fill="currentColor"
+                      strokeWidth={1.5}
+                    />
+                  </div>
 
-  {/* Rating + Verified */}
-  <div className="relative z-10 flex items-center justify-between">
-    {/* Rating */}
-    <div className="flex gap-0.5">
-      {Array.from({ length: 5 }).map((_, index) => (
-        <Star
-          key={index}
-          size={16}
-          className={
-            index < testimonial.rating
-              ? "fill-yellow-400 text-yellow-400"
-              : "text-slate-200 dark:text-slate-700"
-          }
-        />
-      ))}
-    </div>
+                  {/* Rating + Verified */}
+                  <div className="relative z-10 flex items-center justify-between">
+                    {/* Rating */}
+                    <div className="flex gap-0.5">
+                      {Array.from({ length: 5 }).map((_, index) => (
+                        <Star
+                          key={index}
+                          size={16}
+                          className={
+                            index < testimonial.rating
+                              ? "fill-yellow-400 text-yellow-400"
+                              : "text-slate-200 dark:text-slate-700"
+                          }
+                        />
+                      ))}
+                    </div>
 
-    {/* Verified */}
-    <span
-      className="
+                    {/* Verified */}
+                    <span
+                      className="
         flex
         items-center
         gap-1
@@ -284,15 +261,15 @@ const Testimonials = () => {
         dark:bg-emerald-500/10
         dark:text-emerald-400
       "
-    >
-      <BadgeCheck size={13} />
-      Verified
-    </span>
-  </div>
+                    >
+                      <BadgeCheck size={13} />
+                      Verified
+                    </span>
+                  </div>
 
-  {/* Review */}
-  <blockquote
-    className="
+                  {/* Review */}
+                  <blockquote
+                    className="
       relative
       z-10
       mt-7
@@ -305,29 +282,29 @@ const Testimonials = () => {
 
       dark:text-slate-300
     "
-  >
-    “{testimonial.review}”
-  </blockquote>
+                  >
+                    “{testimonial.review}”
+                  </blockquote>
 
-  {/* Divider */}
-  <div
-    className="
+                  {/* Divider */}
+                  <div
+                    className="
       my-6
       h-px
       bg-slate-100
 
       dark:bg-slate-800
     "
-  />
+                  />
 
-  {/* Customer */}
-  <div className="relative z-10 flex items-center gap-3">
-    <div className="relative shrink-0">
-      <img
-        src={testimonial.image}
-        alt={testimonial.name}
-        loading="lazy"
-        className="
+                  {/* Customer */}
+                  <div className="relative z-10 flex items-center gap-3">
+                    <div className="relative shrink-0">
+                      <img
+                        src={testimonial.image}
+                        alt={testimonial.name}
+                        loading="lazy"
+                        className="
           h-12
           w-12
           rounded-full
@@ -337,89 +314,31 @@ const Testimonials = () => {
 
           dark:ring-primary/20
         "
-      />
+                      />
 
-      {/* Verified Avatar Badge */}
-      <span
-        className="
-          absolute
-          -bottom-1
-          -right-1
-          flex
-          h-5
-          w-5
-          items-center
-          justify-center
-          rounded-full
-          bg-primary
-          text-white
-        "
-      >
-        <BadgeCheck size={12} />
-      </span>
-    </div>
+                      {/* Verified Avatar Badge */}
+                      <span
+                        className="absolute -bottom-1-right-1flex h-5 w-5 items-center justify-center rounded-full bg-primary text-white">
+                        <BadgeCheck size={12} />
+                      </span>
+                    </div>
 
-    <div className="min-w-0">
-      <h3
-        className="
-          truncate
-          text-sm
-          font-bold
-          text-slate-900
+                    <div className="min-w-0">
+                      <h3 className="truncate text-sm font-bold text-slate-900 dark:text-white">
+                        {testimonial.name}
+                      </h3>
+                      <p className="mt-0.5text-xs text-slate-500 dark:text-slate-400">
+                        {testimonial.role}
+                      </p>
+                    </div>
+                  </div>
 
-          dark:text-white
-        "
-      >
-        {testimonial.name}
-      </h3>
-
-      <p
-        className="
-          mt-0.5
-          text-xs
-          text-slate-500
-
-          dark:text-slate-400
-        "
-      >
-        {testimonial.role}
-      </p>
-    </div>
-  </div>
-
-  {/* Bottom Accent */}
-  <div
-    className="
-      absolute
-      bottom-0
-      left-0
-      h-1
-      w-0
-      bg-primary
-      transition-all
-      duration-500
-      group-hover/card:w-full
-    "
-  />
-</article>
+                  {/* Bottom Accent */}
+                  <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-500group-hover/card:w-full" />
+                </article>
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Trust Text */}
-        <div
-          className="
-            mt-10 flex
-            items-center justify-center
-            gap-2 px-4
-            text-center text-sm
-            text-slate-500
-            dark:text-slate-400
-          "
-        >
-          <BadgeCheck size={17} className="text-primary" />
-          Trusted by homeowners for quality home services
         </div>
       </div>
     </section>

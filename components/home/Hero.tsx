@@ -15,21 +15,21 @@ import Container from "../shared/Container";
 const scenes = [
   {
     image:
-      "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=1920&auto=format&fit=crop",
+      "https://fixitheroes.ae/wp-content/uploads/2026/02/2.png",
     alt: "Electrician installing home wiring",
     category: "Electrical & AC Repair",
     city: "Dhaka",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1676210134188-4c05dd172f89?q=80&w=1920&auto=format&fit=crop",
+      "https://cdn.prod.website-files.com/672c783eb245d962f945af09/6928fec6cc55005b88b166c9_3f636fd9bacf0febe60251dcda67c57e069ba701.jpeg",
     alt: "Plumber repairing a pipe behind a wall",
     category: "Plumbing",
     city: "Chattogram",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=1920&auto=format&fit=crop",
+      "https://www.gharpedia.com/cf-img/uploads/2024/10/Professional-Equipment-and-Products-05-0504170065.jpg",
     alt: "Professional cleaning a modern home",
     category: "Home Cleaning",
     city: "Khulna",

@@ -14,7 +14,6 @@ interface ServicesPageProps {
   }>;
 }
 
-
 export default async function ServicesPage({
   searchParams,
 }: ServicesPageProps) {
@@ -31,20 +30,46 @@ export default async function ServicesPage({
   const categories = await getCategories();
 
   return (
-    <div className="py-10">
+    <div className="py-12 bg-background min-h-screen">
       <Container>
-        <div className="mb-10">
-          <ServiceFilters
-            search={params.search ?? ""}
-            categoryId={params.categoryId ?? "all"}
-            minPrice={params.minPrice}
-            maxPrice={params.maxPrice}
-            location={params.location ?? ""}
-            categories={categories.data}
-          />
-        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <aside className="lg:col-span-3 lg:sticky lg:top-24 bg-card p-5 rounded-2xl border border-border/50 shadow-[0_2px_8px_rgba(0,0,0,0.01)]">
+            <div className="space-y-4">
+              <div className="pb-3 border-b border-border/40">
+                <h2 className="text-sm font-bold tracking-tight text-foreground uppercase">
+                  Filters
+                </h2>
+                <p className="text-[11px] text-muted-foreground mt-0.5">
+                  Narrow down your search results
+                </p>
+              </div>
+              
+              <ServiceFilters
+                search={params.search ?? ""}
+                categoryId={params.categoryId ?? "all"}
+                minPrice={params.minPrice}
+                maxPrice={params.maxPrice}
+                location={params.location ?? ""}
+                categories={categories.data}
+              />
+            </div>
+          </aside>
 
-        <ServiceList services={services} />
+          
+          <main className="lg:col-span-9 space-y-6">
+            <div className="flex items-center justify-between bg-muted/30 border border-border/40 px-5 py-3 rounded-xl">
+              <p className="text-xs font-semibold text-muted-foreground">
+                Showing <span className="text-foreground font-bold">{services?.length ?? 0}</span> services found
+              </p>
+            </div>
+
+            <ServiceList services={services} />
+          </main>
+
+        </div>
+        {/* <div className="text-center mt-10">
+          pagination
+        </div> */}
       </Container>
     </div>
   );
