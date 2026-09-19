@@ -30,12 +30,11 @@ export default function TechnicianList({ technicians }: TechnicianListProps) {
   }
 
   return (
-    /* A standard, fully responsive Grid wrapper built for your dynamic card instances */
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center">
       {technicians.map((tech) => (
         <TechnicianCard 
           key={tech.id} 
-          technician={tech} // 2️⃣ FIXED: Changed from plural 'technicians' to singular 'technician'
+          technician={tech}
         />
       ))}
     </div>
