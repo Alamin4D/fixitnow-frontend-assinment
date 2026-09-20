@@ -1,70 +1,123 @@
 "use client";
 
+import React from "react";
+import { motion, type Variants } from "framer-motion";
 import {
   ArrowRight,
   CalendarCheck,
   CheckCircle2,
   Search,
   UserRoundCheck,
+  Sparkles,
 } from "lucide-react";
 
 const steps = [
   {
     step: "01",
-    title: "Find a Service",
+    action: "SEARCH",
+    title: "Find Your Service",
     description:
-      "Browse trusted home services and find the right solution for your needs.",
+      "Type what you need in the search bar. Browse trusted home services instantly.",
     icon: Search,
+    color: "from-blue-500 to-cyan-400",
+    glow: "rgba(59,130,246,0.15)",
   },
   {
     step: "02",
-    title: "Choose a Technician",
+    action: "SELECT",
+    title: "Choose an Expert",
     description:
-      "Compare experienced technicians based on rating, location, and expertise.",
+      "Compare vetted local technicians based on live ratings, reviews, and expertise.",
     icon: UserRoundCheck,
+    color: "from-purple-500 to-indigo-400",
+    glow: "rgba(168,85,247,0.15)",
   },
   {
     step: "03",
+    action: "SCHEDULE",
     title: "Book a Time Slot",
     description:
-      "Select a convenient date and time that works best for your schedule.",
+      "Pick a convenient date and hour that perfectly aligns with your busy schedule.",
     icon: CalendarCheck,
+    color: "from-amber-500 to-orange-400",
+    glow: "rgba(245,158,11,0.15)",
   },
   {
     step: "04",
-    title: "Get the Service",
+    action: "RELAX",
+    title: "Get Job Done",
     description:
-      "Sit back and relax while your trusted technician takes care of the job.",
+      "Sit back and relax while our certified professional takes complete care of the rest.",
     icon: CheckCircle2,
+    color: "from-emerald-500 to-teal-400",
+    glow: "rgba(16,185,129,0.15)",
   },
 ];
 
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 },
+  },
+};
+
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const },
+  },
+};
+
 export default function HowItWorks() {
   return (
-    <section className="relative overflow-hidden bg-background py-20 sm:py-24 lg:py-28">
-      {/* Soft Background Accent Blobs */}
-      <div className="pointer-events-none absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-primary/5 blur-[120px]" />
-      <div className="pointer-events-none absolute -right-20 top-1/3 h-72 w-72 rounded-full bg-blue-500/5 blur-[100px]" />
+    <section className="relative overflow-hidden  py-20 sm:py-24 transition-colors duration-300">
+      
+      
+      <div className="pointer-events-none absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full" />
+      <div className="pointer-events-none absolute -right-20 top-1/3 h-72 w-72 rounded-full bg-emerald-500/5 dark:bg-emerald-500/5 blur-[100px]" />
 
       <div className="container relative mx-auto px-4 sm:px-6 max-w-6xl">
         
         {/* ================= HEADER ================= */}
         <div className="mx-auto max-w-2xl text-center space-y-4">
-          <span className="inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-3.5 py-1 text-[11px] font-semibold uppercase tracking-[0.15em] text-primary shadow-sm">
-            Simple Workflow
-          </span>
+          <motion.span 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 dark:border-gray-800 px-4 py-1.5 text-[11px] font-bold uppercase text-primary shadow-sm"
+          >
+            <Sparkles className="h-3.5 w-3.5 text-primary animate-pulse" />
+            Simple 4-Step Process
+          </motion.span>
 
-          <p className="mx-auto max-w-lg text-sm leading-relaxed text-muted-foreground sm:text-base">
-            Getting professional help for your home has never been easier. Follow these four simple steps to get the job done.
-          </p>
+          <motion.p 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mx-auto max-w-xl text-sm leading-relaxed text-gray-500 dark:text-gray-400 sm:text-base font-medium"
+          >
+            Getting professional help for your home maintenance is incredibly easy. Just follow these simple steps to complete your task effortlessly.
+          </motion.p>
         </div>
 
         {/* ================= STEPS GRID ================= */}
-        <div className="relative mx-auto mt-20">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-100px" }}
+          className="relative mx-auto mt-20"
+        >
           
-          {/* Desktop Connecting Background Line (Perfected Alignment) */}
+          
           <div className="absolute left-[12%] right-[12%] top-[40px] hidden lg:block" aria-hidden="true">
-            <div className="h-[2px] w-full border-t-2 border-dashed border-border transition-colors duration-300 group-hover:border-primary/30" />
+            <div className="h-[2px] w-full border-t-2 border-dashed border-gray-200 dark:border-gray-800" />
           </div>
 
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -72,53 +125,69 @@ export default function HowItWorks() {
               const Icon = item.icon;
 
               return (
-                <div key={item.step} className="group relative flex flex-col items-center text-center">
+                <motion.div 
+                  key={item.step} 
+                  variants={cardVariants}
+                  className="group relative flex flex-col items-center text-center"
+                >
                   
-                  {/* Step Visual Top Bubble */}
+                  
                   <div className="relative z-10 flex h-20 w-20 items-center justify-center">
-                    {/* Glowing effect behind icon */}
-                    <div className="absolute inset-0 rounded-2xl bg-primary/5 blur-lg transition-all duration-500 group-hover:bg-primary/10 group-hover:scale-110" />
+                    
+                    <div 
+                      className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 blur-xl transition-all duration-500 scale-110" 
+                      style={{ backgroundColor: item.glow }}
+                    />
 
-                    {/* Main Icon Box with balanced styling */}
-                    <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl border border-border/80 bg-card text-muted-foreground shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:scale-105 group-hover:border-primary/40 group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-md group-hover:shadow-primary/10">
-                      <Icon className="h-6 w-6 transition-transform duration-300" strokeWidth={1.5} />
+                    
+                    <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 text-gray-500 dark:text-gray-400 shadow-sm transition-all duration-300 group-hover:-translate-y-1.5 group-hover:scale-105 group-hover:border-transparent group-hover:bg-gradient-to-br group-hover:text-white group-hover:shadow-lg">
+                      <Icon className="h-6 w-6 transition-transform duration-300" strokeWidth={1.75} />
+                      
+                      <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10`} />
                     </div>
 
-                    {/* Clean Number Badge instead of multiple overlapping indicators */}
-                    <span className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full border-2 border-background bg-muted text-[10px] font-bold text-muted-foreground transition-colors duration-300 group-hover:bg-indigo-600 group-hover:text-white group-hover:border-background">
+                    
+                    <span className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full border-2 border-white dark:border-gray-950 bg-gray-100 dark:bg-gray-800 text-[10px] font-black text-gray-600 dark:text-gray-400 transition-all duration-300 group-hover:bg-gray-950 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-gray-950">
                       {item.step}
                     </span>
                   </div>
 
-                  {/* Card Content Block */}
-                  <div className="mt-5 w-full rounded-2xl border border-border/40 bg-card/60 p-5 pt-6 shadow-[0_2px_8px_rgba(0,0,0,0.02)] transition-all duration-300 group-hover:border-primary/20 group-hover:bg-card group-hover:shadow-[0_12px_24px_-4px_rgba(0,0,0,0.06)] flex-1 flex flex-col">
-                    <h3 className="text-base font-bold tracking-tight text-foreground transition-colors duration-300 group-hover:text-primary">
+                  
+                  <div className="mt-5 w-full rounded-[20px] border border-gray-100 dark:border-gray-900/60 bg-gray-50/50 dark:bg-gray-900/20 p-6 pt-7 shadow-[0_2px_12px_rgba(0,0,0,0.01)] transition-all duration-300 group-hover:border-gray-200 dark:group-hover:border-gray-800 group-hover:bg-white dark:group-hover:bg-gray-900 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.04)] dark:group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] flex-1 flex flex-col relative overflow-hidden">
+                    
+                    
+                    <span className={`inline-block mx-auto text-[9px] font-black tracking-widest px-2.5 py-0.5 rounded bg-gradient-to-r ${item.color} text-white mb-3 shadow-sm`}>
+                      {item.action}
+                    </span>
+
+                    <h3 className="text-base font-extrabold tracking-tight text-gray-950 dark:text-gray-50 transition-colors duration-300">
                       {item.title}
                     </h3>
-                    <p className="mt-2.5 text-xs leading-relaxed text-muted-foreground/90 flex-1">
+                    
+                    <p className="mt-2.5 text-xs leading-relaxed text-gray-500 dark:text-gray-400 font-medium flex-1">
                       {item.description}
                     </p>
 
-                    {/* Mobile/Tablet Arrow */}
+                    
                     {index < steps.length - 1 && (
-                      <div className="mt-4 flex justify-center lg:hidden" aria-hidden="true">
-                        <ArrowRight className="h-4 w-4 text-muted-foreground/30 animate-pulse" />
+                      <div className="mt-5 flex justify-center lg:hidden" aria-hidden="true">
+                        <ArrowRight className="h-4 w-4 text-gray-300 dark:text-gray-700 animate-pulse" />
                       </div>
                     )}
                   </div>
 
-                  {/* Desktop Middle Arrow (Perfect Center Placement) */}
+                  
                   {index < steps.length - 1 && (
-                    <div className="absolute -right-4 top-[26px] z-20 hidden h-7 w-7 items-center justify-center rounded-full border border-border bg-background text-muted-foreground shadow-sm transition-all duration-300 group-hover:border-primary/30 group-hover:text-primary lg:flex" aria-hidden="true">
+                    <div className="absolute -right-4 top-[26px] z-20 hidden h-7 w-7 items-center justify-center rounded-full border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 text-gray-400 dark:text-gray-600 shadow-sm transition-all duration-300 group-hover:border-gray-400 dark:group-hover:border-gray-600 lg:flex" aria-hidden="true">
                       <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5" />
                     </div>
                   )}
 
-                </div>
+                </motion.div>
               );
             })}
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </section>

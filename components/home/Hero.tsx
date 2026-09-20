@@ -9,9 +9,7 @@ import { ArrowRight, Search, ShieldCheck, Star, Users, MapPin } from "lucide-rea
 import { Button } from "@/components/ui/button";
 import Container from "../shared/Container";
 
-// Real trade photography — not staged stock. Each scene is tied to a
-// service category the platform actually offers, and to one of the
-// three cities FixItNow covers.
+
 const scenes = [
   {
     image:
@@ -22,17 +20,17 @@ const scenes = [
   },
   {
     image:
-      "https://cdn.prod.website-files.com/672c783eb245d962f945af09/6928fec6cc55005b88b166c9_3f636fd9bacf0febe60251dcda67c57e069ba701.jpeg",
-    alt: "Plumber repairing a pipe behind a wall",
-    category: "Plumbing",
-    city: "Chattogram",
-  },
-  {
-    image:
       "https://www.gharpedia.com/cf-img/uploads/2024/10/Professional-Equipment-and-Products-05-0504170065.jpg",
     alt: "Professional cleaning a modern home",
     category: "Home Cleaning",
     city: "Khulna",
+  },
+  {
+    image:
+      "https://cdn.prod.website-files.com/672c783eb245d962f945af09/6928fec6cc55005b88b166c9_3f636fd9bacf0febe60251dcda67c57e069ba701.jpeg",
+    alt: "Plumber repairing a pipe behind a wall",
+    category: "Plumbing",
+    city: "Chattogram",
   },
 ];
 
