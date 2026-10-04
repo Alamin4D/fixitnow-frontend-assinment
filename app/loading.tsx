@@ -1,6 +1,3 @@
-// "use client" আর framer-motion লাগছে না: সব অ্যানিমেশন এখন পিওর CSS।
-// CSS অ্যানিমেশন সার্ভার থেকে আসা HTML দেখানোর সঙ্গে সঙ্গে চলে,
-// JavaScript লোড বা hydrate হওয়ার জন্য অপেক্ষা করে না।
 import { Wrench, Settings, ShieldCheck, Cpu } from 'lucide-react';
 
 const STATUS_MESSAGES = [
