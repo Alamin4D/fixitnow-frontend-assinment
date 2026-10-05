@@ -16,7 +16,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "FieldPro",
+  title: "FixitNow",
   description: "Your Trusted Home Service Platform",
 };
 
