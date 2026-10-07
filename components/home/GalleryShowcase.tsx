@@ -83,10 +83,7 @@ export default function GalleryShowcase() {
             transition={{ delay: 0.1 }}
             className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
           >
-            Real work
-            <span className="">
-              Real professionals.
-            </span>
+            Real work Real professionals.
           </motion.h2>
 
           <motion.p
