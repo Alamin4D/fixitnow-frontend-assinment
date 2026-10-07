@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge"; // shadcn ব্যাজ ব্যবহার করা হয়েছে
+import { Badge } from "@/components/ui/badge";
 
 import {
   ArrowRight,
@@ -14,7 +14,7 @@ import {
   MapPin,
   Star,
   User,
-  ShieldCheck, // প্রিমিয়াম ট্রাস্ট মার্কার
+  ShieldCheck,
 } from "lucide-react";
 
 interface ServiceCardProps {
@@ -65,7 +65,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
                 alt={service.category.name}
                 unoptimized
                 fill
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-125"
               />
             </div>
           ) : (
@@ -150,7 +150,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
           <div className="mt-4 pt-1">
             <Button
               asChild
-              variant="outline" // প্রিমিয়াম লুকের জন্য ডিফল্ট আউটলাইন যা হোভারে সলিড কালার হবে
+              variant="outline"
               className="w-full h-9 rounded-xl text-xs font-semibold shadow-none border-border/60 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
             >
               <Link href={`/services/${service.id}`} className="flex items-center justify-center gap-1.5">
